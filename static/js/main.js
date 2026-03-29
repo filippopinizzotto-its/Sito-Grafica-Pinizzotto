@@ -154,81 +154,47 @@ document.addEventListener('DOMContentLoaded', function () {
             const buildLightbulbShape = (centerX, centerY, size) => {
                 targetShape.length = 0;
                 const off = document.createElement('canvas');
-                off.width = size * 1.5;
-                off.height = size * 1.5;
+                // Ensure integer dimensions for safe data extraction
+                const w = Math.ceil(size * 2.5);
+                const h = Math.ceil(size * 2.5);
+                off.width = w;
+                off.height = h;
                 const octx = off.getContext('2d', { willReadFrequently: true });
                 if (!octx) return;
 
-                // Sposta la lampadina più in alto nel canvas di appoggio
-                const center = (size * 1.5) / 2;
-                const verticalOffset = -size * 0.18; // Sposta verso l'alto (valore empirico)
+                // Sposta l'origine al centro e centra verticalmente
+                const center = w / 2;
+                const verticalOffset = -size * 0.1;
                 octx.translate(center, center + verticalOffset);
                 const scale = size / 100;
                 octx.scale(scale, scale);
 
-                // DISEGNO LAMPADINA PIENA ISPIRATA ALL'ICONA
-                // Bulbo
-                octx.beginPath();
-                octx.arc(0, -10, 38, Math.PI * 1.1, Math.PI * 1.9, false); // parte superiore
-                octx.bezierCurveTo(-38, 20, -20, 45, 0, 60);
-                octx.bezierCurveTo(20, 45, 38, 20, 38, -10);
-                octx.closePath();
-                octx.fillStyle = '#222';
-                octx.fill();
+                octx.fillStyle = '#000000';
+                
+                // SVG Path perfetto per una lampadina moderna, elegante e chiusa
+                const bulbPath = new Path2D('M 0 -45 C -25 -45 -45 -25 -45 0 C -45 15 -35 28 -20 38 L -15 55 L 15 55 L 20 38 C 35 28 45 15 45 0 C 45 -25 25 -45 0 -45 Z');
+                octx.fill(bulbPath);
+                
+                // Base della lampadina a segmenti per il filetto metallico
+                const base1 = new Path2D('M -15 58 L 15 58 L 15 65 L -15 65 Z');
+                const base2 = new Path2D('M -13 68 L 13 68 L 13 73 L -13 73 Z');
+                const base3 = new Path2D('M -9 76 L 9 76 L 7 81 L -7 81 Z');
+                octx.fill(base1);
+                octx.fill(base2);
+                octx.fill(base3);
 
-                // Filetto base
-                octx.fillStyle = '#222';
-                octx.fillRect(-15, 60, 30, 10);
-                octx.fillRect(-12, 70, 24, 7);
-                octx.fillRect(-9, 77, 18, 6);
+                const data = octx.getImageData(0, 0, w, h).data;
+                const offsetX = centerX - w / 2;
+                const offsetY = centerY - h / 2;
 
-                // Filamento (bianco)
-                octx.save();
-                octx.strokeStyle = '#fff';
-                octx.lineWidth = 4;
-                octx.beginPath();
-                octx.moveTo(-12, 20);
-                octx.bezierCurveTo(-8, 10, 8, 10, 12, 20);
-                octx.moveTo(-6, 20);
-                octx.lineTo(-6, 5);
-                octx.moveTo(6, 20);
-                octx.lineTo(6, 5);
-                octx.stroke();
-                octx.restore();
-
-                // RAGGI DI LUCE (opzionali, bianchi)
-                octx.save();
-                octx.strokeStyle = '#fff';
-                octx.lineWidth = 3;
-                const rays = [
-                    { x1: 0, y1: -52, x2: 0, y2: -70 },
-                    { x1: 32, y1: -32, x2: 45, y2: -45 },
-                    { x1: 45, y1: 0, x2: 60, y2: 0 },
-                    { x1: 32, y1: 32, x2: 45, y2: 45 },
-                    { x1: -32, y1: -32, x2: -45, y2: -45 },
-                    { x1: -45, y1: 0, x2: -60, y2: 0 },
-                    { x1: -32, y1: 32, x2: -45, y2: 45 }
-                ];
-                rays.forEach(r => {
-                    octx.beginPath();
-                    octx.moveTo(r.x1, r.y1);
-                    octx.lineTo(r.x2, r.y2);
-                    octx.stroke();
-                });
-                octx.restore();
-
-                // Estrazione punti pieni
-                const data = octx.getImageData(0, 0, off.width, off.height).data;
-                // Centra la lampadina nel canvas principale
-                const offsetX = centerX - off.width * 0.5;
-                const offsetY = centerY - off.height * 0.5 + size * 0.18; // Compensa lo spostamento verticale
-
-                for (let y = 0; y < off.height; y += 1.2) {
-                    for (let x = 0; x < off.width; x += 1.2) {
-                        const idx = ((Math.floor(y) * off.width) + Math.floor(x)) * 4;
-                        // Prendi i pixel scuri (lampadina piena)
-                        if (data[idx + 3] > 20 && data[idx] < 60 && data[idx+1] < 60 && data[idx+2] < 60) {
-                            targetShape.push({ x: x + offsetX, y: y + offsetY });
+                // Estrazione sicura: controlliamo solo l'Alfa
+                for (let y = 0; y < h; y += 1.3) {
+                    for (let x = 0; x < w; x += 1.3) {
+                        const px = Math.floor(x);
+                        const py = Math.floor(y);
+                        const alpha = data[(py * w + px) * 4 + 3];
+                        if (alpha > 128) {
+                            targetShape.push({ x: px + offsetX, y: py + offsetY });
                         }
                     }
                 }
@@ -259,8 +225,20 @@ document.addEventListener('DOMContentLoaded', function () {
                 buildLightbulbShape(centerX, centerY, bulbSize);
 
                 const count = 4000; 
+                const palette = [
+                    '#c41e5f', // Magenta standard
+                    '#ffffff', // Bianco
+                    '#7a1139', // Magenta scuro
+                    '#ff66a3', // Magenta chiaro
+                    '#bae6fd'  // Azzurrino chiaro
+                ];
+                
+                // Distribuiamo uniformemente i 4000 punti lungo TUTTA la forma estratta.
+                const step = Math.max(1, targetShape.length / count);
+
                 for (let i = 0; i < count; i++) {
-                    const target = targetShape[i % targetShape.length];
+                    const targetIndex = Math.floor(i * step) % targetShape.length;
+                    const target = targetShape[targetIndex] || { x: centerX, y: centerY };
                     particles.push({
                         x: Math.random() * width,
                         y: Math.random() * height,
@@ -268,9 +246,14 @@ document.addEventListener('DOMContentLoaded', function () {
                         scatterY: Math.random() * height,
                         targetX: target.x,
                         targetY: target.y,
-                        size: Math.random() * 1.5 + 0.6,
-                        color: Math.random() > 0.25 ? 'rgba(196, 30, 95, 1)' : 'rgba(255, 255, 255, 0.9)',
-                        speed: 0.12 + Math.random() * 0.08
+                        size: Math.random() * 1.8 + 0.8,
+                        color: palette[Math.floor(Math.random() * palette.length)],
+                        // Movimento molto più dolce e fluido
+                        speed: 0.03 + Math.random() * 0.04,
+                        // Effetto di fluttuazione ("breathing/wobbling")
+                        wobbleOffset: Math.random() * Math.PI * 2,
+                        wobbleSpeed: 0.0005 + Math.random() * 0.0015,
+                        wobbleDist: Math.random() * 4 + 1
                     });
                 }
             };
@@ -288,29 +271,34 @@ document.addEventListener('DOMContentLoaded', function () {
 
             const animate = () => {
                 ctx.clearRect(0, 0, width, height);
+                const time = Date.now();
+                const mouseArea = mouse.radius;
+                const force = 0.5;
+
                 particles.forEach(p => {
-                    let tx, ty;
+                    let baseTx, baseTy;
 
                     if (mouse.active) {
-                        tx = p.targetX;
-                        ty = p.targetY;
-
-                        const dx = mouse.x - p.x;
-                        const dy = mouse.y - p.y;
+                        baseTx = p.targetX;
+                        baseTy = p.targetY;
+                        
+                        const dx = p.x - mouse.x;
+                        const dy = p.y - mouse.y;
                         const dist = Math.hypot(dx, dy);
-                        if (dist < mouse.radius) {
+
+                        if (dist < mouseArea) {
                             const angle = Math.atan2(dy, dx);
-                            const force = (mouse.radius - dist) / mouse.radius;
-                            tx -= Math.cos(angle) * force * 30;
-                            ty -= Math.sin(angle) * force * 30;
+                            // Interazione col mouse morbida
+                            baseTx += Math.cos(angle) * (mouseArea - dist) * force;
+                            baseTy += Math.sin(angle) * (mouseArea - dist) * force;
                         }
                     } else {
-                        tx = p.scatterX;
-                        ty = p.scatterY;
+                        baseTx = p.scatterX;
+                        baseTy = p.scatterY;
                         
                         // Deriva lenta naturale
-                        p.scatterX += (Math.random() - 0.5) * 0.4;
-                        p.scatterY += (Math.random() - 0.5) * 0.4;
+                        p.scatterX += (Math.random() - 0.5) * 0.6;
+                        p.scatterY += (Math.random() - 0.5) * 0.6;
                         
                         if (p.scatterX < 0) p.scatterX = width;
                         if (p.scatterX > width) p.scatterX = 0;
@@ -318,14 +306,21 @@ document.addEventListener('DOMContentLoaded', function () {
                         if (p.scatterY > height) p.scatterY = 0;
                     }
 
+                    // Aggiungiamo il movimento fluttuante morbido ("dolce" e fluido)
+                    const tx = baseTx + Math.cos(time * p.wobbleSpeed + p.wobbleOffset) * p.wobbleDist;
+                    const ty = baseTy + Math.sin(time * p.wobbleSpeed + p.wobbleOffset) * p.wobbleDist;
+
+                    // Interpolazione inerziale per un arrivo setoso
                     p.x += (tx - p.x) * p.speed;
                     p.y += (ty - p.y) * p.speed;
 
+                    // Disegniamo tutte le particelle come perfetti cerchi
                     ctx.fillStyle = p.color;
                     ctx.beginPath();
                     ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
                     ctx.fill();
                 });
+                
                 requestAnimationFrame(animate);
             };
 
