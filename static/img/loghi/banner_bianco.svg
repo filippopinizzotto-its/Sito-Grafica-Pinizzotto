@@ -1,0 +1,11 @@
+<svg width="680" height="200" viewBox="0 0 680 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- Stylized 'P' Icon (Approximation of the Pinizzotto logo) -->
+    <path d="M60 140C20 140 30 60 70 60C90 60 110 80 110 100C110 130 90 140 60 140ZM65 130C95 130 100 100 95 85C90 70 75 70 65 70C55 70 40 80 40 105C40 120 50 130 65 130Z" fill="#ffffff" />
+    <path d="M30 110C35 90 60 85 85 90C110 95 125 105 130 120C120 105 100 100 80 100C60 100 35 105 30 110Z" fill="#ffffff" />
+    
+    <!-- Main Text: pinizzotto -->
+    <text x="160" y="115" font-family="'Plus Jakarta Sans', sans-serif" font-weight="700" font-size="78" fill="#ffffff" style="letter-spacing: -2px;">pinizzotto</text>
+    
+    <!-- Subtext: AZIENDA GRAFICA -->
+    <text x="320" y="152" font-family="'Plus Jakarta Sans', sans-serif" font-weight="600" font-size="12" fill="#ffffff" style="letter-spacing: 5px;">AZIENDA GRAFICA</text>
+</svg>
