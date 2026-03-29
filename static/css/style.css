@@ -196,7 +196,7 @@ h6 {
 }
 
 .hero h1 {
-    font-size: clamp(3rem, 8vw, 6rem);
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
     font-weight: 900;
     margin-bottom: 1.5rem;
     line-height: 1.1;
@@ -277,11 +277,15 @@ nav {
    BRANDING & NAVIGATION UI
 ============================================ */
 .logo {
-    height: 55px; /* Corporate Header Size */
+    height: 80px; /* Increased size for better visibility */
     width: auto;
     filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.08));
     transition: all 0.4s var(--anim-ease);
     transform-origin: left center;
+}
+
+html:not(.dark-mode) .logo {
+    filter: invert(1) drop-shadow(0 4px 12px rgba(255, 255, 255, 0.2));
 }
 
 .logo:hover {
@@ -289,8 +293,12 @@ nav {
     filter: drop-shadow(0 8px 24px rgba(196, 30, 95, 0.15));
 }
 
+html:not(.dark-mode) .logo:hover {
+    filter: invert(1) drop-shadow(0 8px 24px rgba(196, 30, 95, 0.3));
+}
+
 header.header-condensed .logo {
-    height: 44px;
+    height: 60px;
 }
 
 .brand-name {
@@ -490,9 +498,9 @@ html.dark-mode .moon-icon {
 
 /* Logo Hero Styling */
 .logo-hero {
-    height: 85px; /* Corporate Hero Size */
+    height: 340px; /* Even More Maximum Hero Size */
     width: auto;
-    margin-bottom: 2.5rem;
+    margin-bottom: 2rem;
     filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.1));
     transition: all 0.5s var(--anim-ease);
 }
@@ -506,6 +514,14 @@ html.dark-mode .moon-icon {
 .footer-logo {
     margin-bottom: 2.5rem;
 }
+
+.footer-logo-dark { display: none; }
+.footer-logo-light { display: block; }
+
+html.dark-mode .footer-logo-light { display: none; }
+html.dark-mode .footer-logo-dark { display: block; }
+
+
 
 .footer-logo-img {
     height: 60px; /* Corporate Footer Size */
@@ -4076,9 +4092,9 @@ html.dark-mode .btn-cookie.customize:hover {
 ============================================ */
 .marquee-section {
     padding: 1.5rem 0;
-    background: var(--bg-primary);
-    border-top: 1px solid var(--border-color);
-    border-bottom: 1px solid var(--border-color);
+    background: linear-gradient(90deg, rgba(196, 30, 95, 0.05) 0%, rgba(196, 30, 95, 0.01) 50%, rgba(196, 30, 95, 0.05) 100%);
+    border-top: 1px dashed rgba(196, 30, 95, 0.2);
+    border-bottom: 1px dashed rgba(196, 30, 95, 0.2);
     overflow: hidden;
     position: relative;
     display: flex;
@@ -4086,21 +4102,45 @@ html.dark-mode .btn-cookie.customize:hover {
 }
 
 html.dark-mode .marquee-section {
-    background: rgba(9, 9, 11, 0.4);
+    background: linear-gradient(90deg, rgba(196, 30, 95, 0.15) 0%, rgba(196, 30, 95, 0.05) 50%, rgba(196, 30, 95, 0.15) 100%);
+    border-top: 1px dashed rgba(196, 30, 95, 0.3);
+    border-bottom: 1px dashed rgba(196, 30, 95, 0.3);
 }
 
 .marquee-content {
     display: inline-flex;
+    align-items: center;
     animation: marqueeScroll 35s linear infinite;
 }
 
-.marquee-content span {
-    font-size: 1.15rem;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    color: var(--text-secondary);
+.marquee-content .marquee-text {
+    font-size: 1.25rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    color: var(--text-primary);
     padding: 0 1rem;
     font-family: 'Plus Jakarta Sans', sans-serif;
+    display: inline-flex;
+    align-items: center;
+    opacity: 0.9;
+}
+
+.m-dot {
+    color: var(--primary);
+    font-size: 0.75rem;
+    margin: 0 2rem;
+    filter: drop-shadow(0 0 5px rgba(196, 30, 95, 0.5));
+    animation: pulseDot 2s infinite alternate;
+}
+
+html.dark-mode .m-dot {
+    color: var(--accent);
+    filter: drop-shadow(0 0 8px rgba(255, 45, 125, 0.8));
+}
+
+@keyframes pulseDot {
+    0% { transform: scale(1); opacity: 0.7; }
+    100% { transform: scale(1.3); opacity: 1; }
 }
 
 @keyframes marqueeScroll {
