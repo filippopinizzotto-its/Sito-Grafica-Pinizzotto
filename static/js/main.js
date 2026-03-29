@@ -297,13 +297,14 @@ document.addEventListener('DOMContentLoaded', function () {
                         baseTy = p.scatterY;
                         
                         // Deriva lenta naturale
-                        p.scatterX += (Math.random() - 0.5) * 0.6;
-                        p.scatterY += (Math.random() - 0.5) * 0.6;
+                        p.scatterX += (Math.random() - 0.5) * 0.8;
+                        p.scatterY += (Math.random() - 0.5) * 0.8;
                         
-                        if (p.scatterX < 0) p.scatterX = width;
-                        if (p.scatterX > width) p.scatterX = 0;
-                        if (p.scatterY < 0) p.scatterY = height;
-                        if (p.scatterY > height) p.scatterY = 0;
+                        // Rimbalzo morbido ai bordi: impedisce salti da una parte all'altra dello schermo
+                        if (p.scatterX < 0) p.scatterX = 0;
+                        if (p.scatterX > width) p.scatterX = width;
+                        if (p.scatterY < 0) p.scatterY = 0;
+                        if (p.scatterY > height) p.scatterY = height;
                     }
 
                     // Aggiungiamo il movimento fluttuante morbido ("dolce" e fluido)
