@@ -690,7 +690,7 @@ html.dark-mode .hero-badge {
 }
 
 .logo-hero {
-    max-width: 680px;
+    max-width: 540px;
     width: 100%;
     height: auto;
     display: block;
@@ -1161,9 +1161,11 @@ html.dark-mode .mini-photo:hover {
 
 .cta-buttons {
     display: flex;
-    gap: 1.5rem;
+    gap: 1.25rem;
     justify-content: center;
     flex-wrap: wrap;
+    padding: 0 1rem;
+    width: 100%;
     animation: fadeInUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.4s both;
 }
 
@@ -3139,23 +3141,27 @@ html.dark-mode .select-group::after {
         position: fixed;
         top: 0;
         right: -100%;
-        width: 320px;
+        width: 100%;  /* Full screen width to avoid leaks at the edge */
+        max-width: 400px; /* Optional: cap it on tablets */
         height: 100vh;
-        background: rgba(255, 255, 255, 0.98);
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
+        background: rgba(255, 255, 255, 0.98); /* Luxury White in Light Mode */
+        backdrop-filter: blur(28px) saturate(200%);
+        -webkit-backdrop-filter: blur(28px) saturate(200%);
         flex-direction: column;
-        padding: 6rem 2rem 2rem;
-        box-shadow: -8px 0 32px rgba(15, 23, 42, 0.1);
-        transition: transform 0.45s cubic-bezier(0.25, 0.95, 0.4, 1.1), opacity 0.35s ease;
-        border-left: 1px solid rgba(196, 30, 95, 0.1);
+        justify-content: center; /* Center links vertically */
+        align-items: center; /* Center links horizontally */
+        padding: 2rem;
+        box-shadow: -10px 0 40px rgba(0, 0, 0, 0.08);
+        transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
+        border-left: 1px solid rgba(255, 255, 255, 0.08); /* Minimal light border */
         transform: translateX(100%);
         opacity: 0;
+        z-index: 2000;
     }
 
     html.dark-mode .nav-menu {
-        background: rgba(30, 41, 59, 0.98);
-        box-shadow: -8px 0 32px rgba(0, 0, 0, 0.3);
+        background: rgba(0, 0, 0, 0.99); /* Deep black for dark mode */
+        box-shadow: -10px 0 50px rgba(0, 0, 0, 0.8);
     }
 
     .nav-menu.active {
@@ -3173,13 +3179,21 @@ html.dark-mode .select-group::after {
     .nav-menu ul {
         flex-direction: column;
         width: 100%;
-        gap: 1.5rem;
+        gap: 2.5rem; /* More air between links */
+        text-align: center;
     }
 
     .nav-menu ul li {
         opacity: 0;
-        transform: translateX(30px);
-        animation: slideInMenu 0.4s ease forwards;
+        transform: translateY(20px); /* Upward entrance instead of side */
+        animation: slideInMenuUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @keyframes slideInMenuUp {
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
     }
 
     .nav-menu.active ul li:nth-child(1) {
@@ -3206,30 +3220,25 @@ html.dark-mode .select-group::after {
         display: flex;
     }
 
-    /* Force gray text in mobile menu */
-    .nav-menu a,
-    .nav-menu a.nav-link,
-    a.nav-link {
-        color: #64748b !important;
+    /* Centralize links across all mobile sizes */
+    .nav-menu .nav-link {
+        font-size: 1.5rem !important; /* Larger for better touch */
+        font-weight: 700 !important;
+        letter-spacing: -0.02em;
+        color: #09090b !important; /* Dark links on white bg (Light Mode) */
+        transition: all 0.3s ease;
     }
 
-    html.dark-mode .nav-menu a,
-    html.dark-mode .nav-menu a.nav-link,
-    html.dark-mode a.nav-link {
-        color: #f1f5f9 !important;
+    html.dark-mode .nav-menu .nav-link {
+        color: #ffffff !important; /* White links on black bg (Dark Mode) */
     }
 
-    /* Consolidate theme toggle inside mobile menu */
-    .theme-toggle {
-        margin: 2rem auto;
-        position: relative;
-        top: 0;
-        left: 0;
-    }
-
-    .service-card,
-    .service-card:nth-child(even) {
-        grid-template-columns: 1fr;
+    /* Adjust Close Icon in Mobile Overlay */
+    header .hamburger.active {
+        position: fixed;
+        right: 2rem;
+        top: 2rem;
+        z-index: 2100;
     }
 
     .service-card:nth-child(even) .service-image {
