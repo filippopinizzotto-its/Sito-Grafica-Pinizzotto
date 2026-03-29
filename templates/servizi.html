@@ -1,0 +1,128 @@
+{% extends "base.html" %}
+
+{% block title %}Servizi - Pinizzotto{% endblock %}
+
+{% block content %}
+<main>
+    <section class="page-header">
+        <h1 class="reveal-text">I Nostri Servizi</h1>
+        <p class="subtitle">Soluzioni professionali per ogni tua esigenza</p>
+    </section>
+
+    <section class="services">
+        <div class="service-card no-tilt-mobile">
+            <div class="service-image">
+                <img src="/static/img/portfolio/stampa.jpeg" alt="Stampa" onerror="this.style.background='linear-gradient(135deg, #667eea 0%, #764ba2 100%)'">
+            </div>
+            <div class="service-content">
+                <div class="service-badge">Stampa</div>
+                <h2>Stampa Professionale</h2>
+                <p>Biglietti da visita, brochure, manifesti e molto altro.<br>Qualità premium per dare vita alle tue idee.</p>
+                <ul class="service-features">
+                    <li>✓ Alta qualità di stampa</li>
+                    <li>✓ Carta premium</li>
+                    <li>✓ Consegna rapida</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="service-card no-tilt-mobile">
+            <div class="service-image">
+                <img src="/static/img/portfolio/grafica.jpg" alt="Grafica" onerror="this.style.background='linear-gradient(135deg, #f093fb 0%, #f5576c 100%)'">
+            </div>
+            <div class="service-content">
+                <div class="service-badge">Grafica</div>
+                <h2>Design Personalizzato</h2>
+                <p>Progetti grafici su misura per il tuo brand: dal logo design al materiale marketing completo.</p>
+                <ul class="service-features">
+                    <li>✓ Design originale</li>
+                    <li>✓ Revisioni illimitate</li>
+                    <li>✓ File sorgente inclusi</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sezione categorie servizi -->
+    <section class="category-section">
+        <div class="category-grid">
+            <!-- Comunicazione Aziendale -->
+            <div class="category-card" data-tilt>
+                <h3>Comunicazione Aziendale</h3>
+                <ul class="category-list">
+                    <li>Dépliant</li>
+                    <li>Cartelline Personalizzate</li>
+                    <li>Fustellatura: Stampati sagomati</li>
+                    <li>Tutti gli altri Stampati e Formati</li>
+                    <li>Badge e Pass</li>
+                    <li>Fascicoli non rilegati e Dispense</li>
+                </ul>
+            </div>
+
+            <!-- Biglietti da Visita -->
+            <div class="category-card" data-tilt>
+                <h3>Biglietti da Visita</h3>
+                <ul class="category-list">
+                    <li>Personalizzati</li>
+                    <li>Classici</li>
+                    <li>Vernice UV</li>
+                    <li>Oro 3D</li>
+                    <li>Rilievo lucido</li>
+                    <li>Plastificati</li>
+                </ul>
+            </div>
+
+            <!-- Comunicazione Promozionale -->
+            <div class="category-card" data-tilt>
+                <h3>Comunicazione Promozionale</h3>
+                <ul class="category-list">
+                    <li>Volantini e Flyer</li>
+                    <li>Cartoline Personalizzate</li>
+                    <li>Adesivi Personalizzati in PVC</li>
+                    <li>Cartoncini, Inviti</li>
+                    <li>Fogli Macchina</li>
+                    <li>Locandine</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="category-grid">
+            <!-- Blocchi Copiativi, Appunti, Numerati -->
+            <div class="category-card" data-tilt>
+                <h3>Blocchi Copiativi, Appunti, Numerati</h3>
+                <ul class="category-list">
+                    <li>Blocchi Copiativi</li>
+                    <li>Block Notes Personalizzati</li>
+                    <li>Block notes con copertina</li>
+                    <li>Quaderni Appunti a Spirale</li>
+                    <li>Quaderni Appunti a Punto Metallico</li>
+                </ul>
+            </div>
+
+            <!-- Calendari e Agende 2026 -->
+            <div class="category-card" data-tilt>
+                <h3>Calendari e Agende 2026</h3>
+                <ul class="category-list">
+                    <li>Agenda 2026</li>
+                    <li>Calendari da Tavolo 2026</li>
+                    <li>Calendari Tascabili 2026</li>
+                    <li>Calendari da Muro 2026</li>
+                    <li>Biglietti di Natale con Busta</li>
+                </ul>
+            </div>
+
+            <!-- Ricerca per settori specifici -->
+            <div class="category-card" data-tilt>
+                <h3>Ricerca per Settori Specifici</h3>
+                <ul class="category-list">
+                    <li>Partecipazioni, Libretti Messa, Tableau</li>
+                    <li>Cartellini per abbigliamento</li>
+                    <li>Packaging</li>
+                    <li>Ristorazione, Hotel</li>
+                    <li>Studi Medici e Laboratori Analisi</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+</main>
+{% endblock %}

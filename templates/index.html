@@ -1,0 +1,159 @@
+{% extends "base.html" %}
+
+{% block title %}Grafica Pinizzotto{% endblock %}
+
+{% block content %}
+    <section class="hero">
+        <div class="hero-background"></div>
+
+        <div class="hero-content">
+            <div class="hero-badge">
+                <span class="badge-pulse"></span> Agenzia Creativa
+            </div>
+            <div class="hero-logo">
+                <img src="{{ url_for('static', filename='img/loghi/banner_magenta.png') }}" alt="Pinizzotto" class="logo-hero">
+            </div>
+            <h1 class="hero-title">
+                Trasformiamo le idee in<br><span class="hero-title-gradient">realtà visiva</span>
+            </h1>
+            <p class="hero-subtitle">
+                Stampa professionale, design su misura e grande formato. L'eccellenza estetica per far crescere il tuo brand.
+            </p>
+            <div class="cta-buttons">
+                <a href="/servizi" class="btn btn-primary">
+                    Scopri i Servizi
+                    <span class="btn-shine"></span>
+                </a>
+                <a href="/contatti" class="btn btn-outline">
+                    Contattaci
+                    <span class="btn-icon">→</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <div class="marquee-section">
+        <div class="marquee-content">
+            <span>BRAND IDENTITY ✦ STAMPA DIGITALE ✦ PACKAGING SU MISURA ✦ GRANDE FORMATO ✦ DESIGN CREATIVO ✦ ESPOSITORI ✦ </span>
+            <span>BRAND IDENTITY ✦ STAMPA DIGITALE ✦ PACKAGING SU MISURA ✦ GRANDE FORMATO ✦ DESIGN CREATIVO ✦ ESPOSITORI ✦ </span>
+        </div>
+    </div>
+
+    <section class="pillars-section">
+        <div class="section-container">
+            <div class="pillars-grid">
+                <div class="pillar-card">
+                    <div class="pillar-icon">🎨</div>
+                    <h3>Design Su Misura</h3>
+                    <p>Ogni progetto è unico. Creiamo grafiche che parlano la lingua del tuo brand.</p>
+                </div>
+                <div class="pillar-card">
+                    <div class="pillar-icon">⚡</div>
+                    <h3>Stampa Veloce</h3>
+                    <p>Tecnologia all'avanguardia per tempi di consegna rapidi senza compromessi sui dettagli.</p>
+                </div>
+                <div class="pillar-card">
+                    <div class="pillar-icon">💎</div>
+                    <h3>Qualità Premium</h3>
+                    <p>Materiali selezionati e finiture d'eccellenza per un impatto visivo superiore.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="particles-showcase-center">
+        <div class="ag-visual-header">
+            <span class="ag-badge">L'Innovazione</span>
+            <h2>Le idee prendono Forma</h2>
+            <p>Muovi il cursore per dar vita alle tue visioni.<br>Precisione tecnologica e creatività in un unico flusso.</p>
+        </div>
+        
+        <div class="canvas-center-container">
+            <canvas id="agCanvas" class="ag-canvas-full"></canvas>
+        </div>
+    </section>
+
+    <section class="bento-values">
+        <div class="bento-header">
+            <span class="ag-badge">L'agenzia</span>
+            <h2>Scegli l'Esperienza</h2>
+        </div>
+        <div class="bento-container compact">
+            <div class="bento-card bento-wide">
+                <div class="bento-icon">🏆</div>
+                <h3>Eredità di Qualità</h3>
+                <p>Anni di storia nella stampa, proiettati verso il futuro digitale.</p>
+            </div>
+            <div class="bento-card bento-square">
+                <div class="bento-icon">🎯</div>
+                <h3>Precisione</h3>
+                <p>Controlli cromatici rigorosi e finiture sartoriali.</p>
+            </div>
+            <div class="bento-card bento-tall">
+                <div class="bento-icon">💡</div>
+                <h3>Supporto</h3>
+                <p>Dalla bozza al montaggio finale, siamo al tuo fianco.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="portfolio-section">
+        <div class="section-header">
+            <h2 class="section-title">Lavori in Evidenza</h2>
+            <p class="section-subtitle">Guarda i nostri ultimi capolavori realizzati</p>
+        </div>
+
+        <div class="portfolio-carousel">
+            <button class="carousel-btn prev" aria-label="Precedente">‹</button>
+            <div class="carousel-track-container">
+                <div class="carousel-track">
+                    <div class="portfolio-slide">
+                        <div class="portfolio-item">
+                            <img src="{{ url_for('static', filename='img/portfolio/packaging.jpg') }}" alt="Packaging" loading="lazy">
+                            <div class="portfolio-overlay">
+                                <h3>Packaging</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="portfolio-slide">
+                        <div class="portfolio-item">
+                            <img src="{{ url_for('static', filename='img/portfolio/grande-formato.jpg') }}" alt="Grande Formato" loading="lazy">
+                            <div class="portfolio-overlay">
+                                <h3>Grande Formato</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="portfolio-slide">
+                        <div class="portfolio-item">
+                            <img src="{{ url_for('static', filename='img/portfolio/etichette.jpg') }}" alt="Etichette" loading="lazy">
+                            <div class="portfolio-overlay">
+                                <h3>Etichette</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="portfolio-slide">
+                        <div class="portfolio-item">
+                            <img src="{{ url_for('static', filename='img/portfolio/brouchures.jpg') }}" alt="Brochures" loading="lazy">
+                            <div class="portfolio-overlay">
+                                <h3>Brochures</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-btn next" aria-label="Successivo">›</button>
+            <div class="carousel-indicators"></div>
+        </div>
+    </section>
+
+    <section class="mega-cta">
+        <div class="mega-cta-content">
+            <h2>Crea il tuo Brand d'impatto</h2>
+            <p>Contattaci per un preventivo personalizzato e gratuito.</p>
+            <div class="cta-actions">
+                <a href="/preventivo" class="btn btn-primary btn-glow">Inizia Ora</a>
+                <a href="/contatti" class="btn btn-outline btn-glass">Contatti</a>
+            </div>
+        </div>
+    </section>
+{% endblock %}

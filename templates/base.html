@@ -3,39 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Contatti - Pinizzotto</title>
-    <meta name="description" content="Contatta Pinizzotto Azienda Grafica: indirizzo, telefono, email e mappa. Siamo qui per il tuo progetto.">
-    <link rel="canonical" href="https://www.pinizzotto.it/contatti.html">
+    <title>{% block title %}Grafica Pinizzotto{% endblock %}</title>
+    <meta name="description" content="Pinizzotto Azienda Grafica: design, stampa professionale, grande formato e soluzioni su misura. Trasformiamo le tue idee in realtà visiva.">
+    <link rel="canonical" href="https://www.pinizzotto.it/">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Contatti - Pinizzotto">
-    <meta property="og:description" content="Scrivici o chiamaci per informazioni e preventivi.">
-    <meta property="og:url" content="https://www.pinizzotto.it/contatti.html">
-    <meta property="og:image" content="img/loghi/banner_magenta.png">
+    <meta property="og:title" content="Pinizzotto Azienda Grafica">
+    <meta property="og:description" content="Design creativo e stampa professionale. Scopri servizi, preventivi e contatti.">
+    <meta property="og:url" content="https://www.pinizzotto.it/">
+    <meta property="og:image" content="/static/img/loghi/banner_magenta.png">
     <meta name="theme-color" content="#c41e5f">
-    <link rel="stylesheet" href="css/style.css?v=9">
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" sizes="32x32" href="/static/img/icons/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/static/img/icons/icon-192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/static/img/icons/icon-512.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/static/img/icons/apple-touch-icon.png">
     <!-- Botpress Webchat -->
     <script src="https://cdn.botpress.cloud/webchat/v3.5/inject.js"></script>
     <script src="https://files.bpcontent.cloud/2025/12/26/15/20251226150220-M60F968Y.js" defer></script>
+    <script>
+        (function() {
+            const theme = localStorage.getItem('theme') || 'dark';
+            if (theme === 'dark') {
+                document.documentElement.classList.add('dark-mode');
+            }
+        })();
+    </script>
 </head>
 <body>
-    
     <header>
         <nav>
             <div class="logo-container">
-                <img src="img/loghi/banner_bianco.png" alt="Pinizzotto" class="logo">
+                <img src="/static/img/loghi/banner_bianco.png" alt="Pinizzotto" class="logo">
             </div>
             <div class="nav-menu">
                 <ul>
-                    <li><a href="index.html" class="nav-link">Home</a></li>
-                    <li><a href="servizi.html" class="nav-link">Servizi</a></li>
-                    <li><a href="preventivo.html" class="nav-link">Preventivo</a></li>
-                    <li><a href="contatti.html" class="nav-link active">Contatti</a></li>
+                    <li><a href="/" class="nav-link {% if request.path == '/' %}active{% endif %}" aria-current="page">Home</a></li>
+                    <li><a href="/servizi" class="nav-link {% if request.path == '/servizi' %}active{% endif %}">Servizi</a></li>
+                    <li><a href="/preventivo" class="nav-link {% if request.path == '/preventivo' %}active{% endif %}">Preventivo</a></li>
+                    <li><a href="/contatti" class="nav-link {% if request.path == '/contatti' %}active{% endif %}">Contatti</a></li>
                 </ul>
-                <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
-                    <span class="sun"></span>
-                    <span class="moon"></span>
-                </button>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode"></button>
             </div>
             <div class="hamburger" id="hamburger">
                 <span></span>
@@ -44,104 +54,7 @@
             </div>
         </nav>
     </header>
-    
-    <main>
-        <section class="page-header">
-            <h1 class="reveal-text">Parliamone</h1>
-            <p class="subtitle">Siamo qui per realizzare il tuo progetto</p>
-        </section>
-
-        <section class="contact-section">
-            <div class="contact-grid">
-                <div class="contact-info">
-                    <h2>Informazioni</h2>
-                    <div class="info-item map">
-                        <div class="info-top">
-                            <span class="info-icon">📍</span>
-                            <div>
-                                <h4>Indirizzo</h4>
-                                <p>Via Nazionale 406/A, Piantedo</p>
-                            </div>
-                        </div>
-                        <div class="map-embed">
-                            <iframe title="Mappa - Pinizzotto Azienda Grafica" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2780.5!2d9.43337!3d46.138468!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47846cc5d791fbe9%3A0xa5f000c3b45b9171!2sPinizzotto%20Azienda%20Grafica!5e0!3m2!1sit!2sit!4v1640000000000!5m2!1sit!2sit" width="100%" height="320" style="border:0;" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
-                        </div>
-                    </div>
-                    <div class="info-item">
-                        <span class="info-icon">📧</span>
-                        <div>
-                            <h4>Email</h4>
-                            <p>info@pinizzotto.it</p>
-                        </div>
-                    </div>
-                    <div class="info-item">
-                        <span class="info-icon">📞</span>
-                        <div>
-                            <h4>Telefono</h4>
-                            <p>+39 0342 683265</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <form class="contact-form" id="contactForm" method="POST" action="https://formsubmit.co/pinizzottofilippo04@gmail.com" data-real-send>
-                    <input type="hidden" name="_subject" value="Nuovo messaggio contatti - Pinizzotto">
-                    <input type="hidden" name="_captcha" value="false">
-                    <input type="hidden" name="_template" value="table">
-                    <input type="text" name="_honey" style="display:none">
-                    <input type="hidden" name="_next" value="contatti.html?success=true">
-                    <h2>Inviaci un messaggio</h2>
-                    <div class="form-group">
-                        <input type="text" id="name" name="nome" placeholder=" " required>
-                        <label for="name">Nome</label>
-                    </div>
-                    <div class="form-group">
-                        <input type="email" id="email" name="email" placeholder=" " required>
-                        <label for="email">Email</label>
-                    </div>
-                    <a href="#" class="privacy-link" id="privacyLink">Leggi l'informativa sulla privacy (D.Lgs 196/2003)</a>
-                    <div class="form-group checkbox">
-                        <input type="checkbox" id="privacy" name="privacy" required>
-                        <label for="privacy">Ho letto l'informativa sulla privacy e acconsento al trattamento dei miei dati personali</label>
-                    </div>
-                    <div class="form-group">
-                        <textarea id="message" name="messaggio" rows="5" placeholder=" " required></textarea>
-                        <label for="message">Messaggio</label>
-                    </div>
-                    <button type="submit" class="btn btn-primary">
-                        Invia Messaggio
-                        <span class="btn-shine"></span>
-                    </button>
-                </form>
-            </div>
-        </section>
-
-        <!-- Sezione Social con animazioni accattivanti -->
-        <section class="social-section">
-            <h2 class="social-title reveal-text">Seguici sui Social</h2>
-            <p class="subtitle">Facebook e Instagram: contenuti, novità e lavori recenti</p>
-            <div class="social-grid">
-                <a class="social-card facebook" href="https://www.facebook.com/pinizzottoaziendagrafica" target="_blank" rel="noopener" data-tilt>
-                    <div class="social-bg"></div>
-                    <div class="social-content">
-                        <img class="social-icon-image" src="img/loghi/facebook.png" alt="Facebook" draggable="false" />
-                        <h3>Facebook</h3>
-                        <p>News, offerte e progetti</p>
-                        <span class="social-cta">Vai alla pagina →</span>
-                    </div>
-                </a>
-                <a class="social-card instagram" href="https://www.instagram.com/pinizzottografica/" target="_blank" rel="noopener" data-tilt>
-                    <div class="social-bg"></div>
-                    <div class="social-content">
-                        <img class="social-icon-image" src="img/loghi/instagram.png" alt="Instagram" draggable="false" />
-                        <h3>Instagram</h3>
-                        <p>Portfolio, storie e dietro le quinte</p>
-                        <span class="social-cta">Apri il profilo →</span>
-                    </div>
-                </a>
-            </div>
-        </section>
-    </main>
-    
+    {% block content %}{% endblock %}
     <!-- Pulsante Torna Su -->
     <button class="scroll-to-top" id="scrollToTop" aria-label="Torna su">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -160,13 +73,13 @@
             </div>
         </div>
     </div>
-    
+
     <footer>
         <div class="footer-content">
             <div class="footer-main">
                 <div class="footer-logo">
-                    <img src="img/icons/logo_nero.png" alt="Pinizzotto" class="footer-logo-img footer-logo-light">
-                    <img src="img/icons/logo.png" alt="Pinizzotto" class="footer-logo-img footer-logo-dark">
+                    <img src="/static/img/icons/logo_nero.png" alt="Pinizzotto" class="footer-logo-img footer-logo-light">
+                    <img src="/static/img/icons/logo.png" alt="Pinizzotto" class="footer-logo-img footer-logo-dark">
                 </div>
                 <div class="footer-info">
                     <p class="footer-address">Via Nazionale, 406/A - 23010 Piantedo SO Italy</p>
@@ -195,7 +108,6 @@
             <p class="footer-copyright">&copy; 2025 Pinizzotto. Tutti i diritti riservati.</p>
         </div>
     </footer>
-    
     <!-- Privacy Modal -->
     <div id="privacyModal" class="privacy-modal">
         <div class="privacy-modal-content">
@@ -252,7 +164,6 @@
             </div>
         </div>
     </div>
-    
-    <script src="js/main.js?v=2"></script>
+    <script src="/static/js/main.js?v=2.0" defer></script>
 </body>
 </html>
