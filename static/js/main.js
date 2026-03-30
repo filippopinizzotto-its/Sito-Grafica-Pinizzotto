@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if (activeRadio) {
         activeRadio.checked = true;
     }
-    
+
     if (savedTheme === 'dark') {
         htmlElement.classList.add('dark-mode');
     }
@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', function () {
             navMenu.classList.toggle('active');
             const isOpen = hamburger.classList.contains('active');
             hamburger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-            
+
             // Lock body scroll when menu is open
             if (isOpen) {
                 document.body.style.overflow = 'hidden';

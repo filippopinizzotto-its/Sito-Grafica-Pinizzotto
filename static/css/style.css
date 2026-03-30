@@ -1,3 +1,8 @@
+@media (max-width: 768px) {
+    .services .service-card:first-child .service-image {
+        display: none;
+    }
+}
 /* ===== VARIABILI CSS PREMIUM ===== */
 :root {
     --primary: #d94f7a;
@@ -4426,7 +4431,7 @@ html.dark-mode .mega-cta-bg::before {
         max-width: 320px;
         margin: 0 auto;
     }
-    
+
     .cta-actions .btn {
         width: 100%;
     }
