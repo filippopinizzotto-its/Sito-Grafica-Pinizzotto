@@ -170,11 +170,11 @@ document.addEventListener('DOMContentLoaded', function () {
                 octx.scale(scale, scale);
 
                 octx.fillStyle = '#000000';
-                
+
                 // SVG Path perfetto per una lampadina moderna, elegante e chiusa
                 const bulbPath = new Path2D('M 0 -45 C -25 -45 -45 -25 -45 0 C -45 15 -35 28 -20 38 L -15 55 L 15 55 L 20 38 C 35 28 45 15 45 0 C 45 -25 25 -45 0 -45 Z');
                 octx.fill(bulbPath);
-                
+
                 // Base della lampadina a segmenti per il filetto metallico
                 const base1 = new Path2D('M -15 58 L 15 58 L 15 65 L -15 65 Z');
                 const base2 = new Path2D('M -13 68 L 13 68 L 13 73 L -13 73 Z');
@@ -204,11 +204,11 @@ document.addEventListener('DOMContentLoaded', function () {
                 particles.length = 0;
                 const header = showcase.querySelector('.ag-visual-header');
                 const headerHeight = header ? header.offsetHeight : 0;
-                
+
                 // Usa le dimensioni REALI del canvas (impostate da resize())
                 // non costanti hardcoded — questo è il fix del clipping
                 const usableHeight = height - headerHeight;
-                
+
                 // Dimensiona la lampadina a massimo il 75% dello spazio disponibile
                 // compreso il canvas offscreen che è size*1.5
                 // Quindi la "footprint" reale è bulbSize * 1.5 in altezza/larghezza
@@ -217,14 +217,14 @@ document.addEventListener('DOMContentLoaded', function () {
                     usableHeight * 0.6,    // max 60% altezza disponibile
                     220                    // cap assoluto per non sovradimensionare
                 );
-                
+
                 const centerX = width / 2;
                 // Centro verticale nello spazio sotto l'header
                 const centerY = headerHeight + usableHeight / 2;
 
                 buildLightbulbShape(centerX, centerY, bulbSize);
 
-                const count = 4000; 
+                const count = 4000;
                 const palette = [
                     '#c41e5f', // Magenta standard
                     '#ffffff', // Bianco
@@ -232,7 +232,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     '#ff66a3', // Magenta chiaro
                     '#bae6fd'  // Azzurrino chiaro
                 ];
-                
+
                 // Distribuiamo uniformemente i 4000 punti lungo TUTTA la forma estratta.
                 const step = Math.max(1, targetShape.length / count);
 
@@ -281,7 +281,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     if (mouse.active) {
                         baseTx = p.targetX;
                         baseTy = p.targetY;
-                        
+
                         const dx = p.x - mouse.x;
                         const dy = p.y - mouse.y;
                         const dist = Math.hypot(dx, dy);
@@ -295,11 +295,11 @@ document.addEventListener('DOMContentLoaded', function () {
                     } else {
                         baseTx = p.scatterX;
                         baseTy = p.scatterY;
-                        
+
                         // Deriva lenta naturale
                         p.scatterX += (Math.random() - 0.5) * 0.8;
                         p.scatterY += (Math.random() - 0.5) * 0.8;
-                        
+
                         // Rimbalzo morbido ai bordi: impedisce salti da una parte all'altra dello schermo
                         if (p.scatterX < 0) p.scatterX = 0;
                         if (p.scatterX > width) p.scatterX = width;
@@ -321,7 +321,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
                     ctx.fill();
                 });
-                
+
                 requestAnimationFrame(animate);
             };
 
@@ -331,7 +331,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 mouse.y = e.clientY - rect.top;
                 mouse.active = true;
             });
-            
+
             showcase.addEventListener('mouseenter', () => { mouse.active = true; });
 
             showcase.addEventListener('mouseleave', () => {

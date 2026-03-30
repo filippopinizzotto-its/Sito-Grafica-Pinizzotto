@@ -1621,28 +1621,48 @@ html.dark-mode .ag-grid::before {
     top: 50%;
     transform: translateY(-50%);
     background: var(--bg-card);
-    border: 2px solid var(--border-color);
-    width: 50px;
-    height: 50px;
+    border: 1.5px solid var(--border-color);
+    width: 43px;
+    height: 43px;
     border-radius: 50%;
-    font-size: 2rem;
-    line-height: 1;
     cursor: pointer;
     z-index: 10;
     transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
     color: var(--text-primary);
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 0;
+}
+
+/* Minimal thin chevron arrow */
+.carousel-btn::after {
+    content: '';
+    display: block;
+    width: 10px;
+    height: 10px;
+    border-right: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+    transition: transform 0.3s var(--anim-ease), border-color 0.3s ease;
+}
+
+.carousel-btn.prev::after {
+    transform: rotate(135deg);
+    margin-left: 3px;
+}
+
+.carousel-btn.next::after {
+    transform: rotate(-45deg);
+    margin-right: 3px;
 }
 
 .carousel-btn:hover {
     background: var(--primary);
-    color: white;
-    transform: translateY(-50%) scale(1.15);
     border-color: var(--primary);
+    transform: translateY(-50%) scale(1.1);
     box-shadow: 0 8px 30px rgba(196, 30, 95, 0.3);
+    color: white;
 }
 
 .carousel-btn.prev {
@@ -3429,12 +3449,14 @@ html.dark-mode .select-group::after {
     /* Better hero text visibility */
     .hero h1,
     .hero-title {
-        color: #0f172a !important; /* Forza il nero fumo in modalità chiara */
+        color: #0f172a !important;
+        /* Forza il nero fumo in modalità chiara */
         text-shadow: 0 2px 20px rgba(255, 255, 255, 0.8);
     }
 
     .hero-title-gradient {
-        background: linear-gradient(135deg, #b83a5c 0%, #d94f7a 100%); /* Gradiente più scuro e saturo */
+        background: linear-gradient(135deg, #b83a5c 0%, #d94f7a 100%);
+        /* Gradiente più scuro e saturo */
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
@@ -3445,7 +3467,7 @@ html.dark-mode .select-group::after {
     html.dark-mode .hero-title {
         color: #f1f5f9 !important;
         text-shadow: 0 2px 20px rgba(0, 0, 0, 0.4),
-                     0 0 30px rgba(217, 79, 122, 0.3);
+            0 0 30px rgba(217, 79, 122, 0.3);
     }
 
     html.dark-mode .hero-title-gradient {

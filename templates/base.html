@@ -1,21 +1,26 @@
 <!DOCTYPE html>
 <html lang="it">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>{% block title %}Grafica Pinizzotto{% endblock %}</title>
-    <meta name="description" content="Pinizzotto Azienda Grafica: design, stampa professionale, grande formato e soluzioni su misura. Trasformiamo le tue idee in realtà visiva.">
+    <meta name="description"
+        content="Pinizzotto Azienda Grafica: design, stampa professionale, grande formato e soluzioni su misura. Trasformiamo le tue idee in realtà visiva.">
     <link rel="canonical" href="https://www.pinizzotto.it/">
     <meta property="og:type" content="website">
     <meta property="og:title" content="Pinizzotto Azienda Grafica">
-    <meta property="og:description" content="Design creativo e stampa professionale. Scopri servizi, preventivi e contatti.">
+    <meta property="og:description"
+        content="Design creativo e stampa professionale. Scopri servizi, preventivi e contatti.">
     <meta property="og:url" content="https://www.pinizzotto.it/">
     <meta property="og:image" content="/static/img/loghi/banner_magenta.png">
     <meta name="theme-color" content="#c41e5f">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="/static/css/style.css?v=6.5">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap"
+        rel="stylesheet">
     <link rel="icon" type="image/png" sizes="32x32" href="/static/img/icons/favicon-32.png">
     <link rel="icon" type="image/png" sizes="192x192" href="/static/img/icons/icon-192.png">
     <link rel="icon" type="image/png" sizes="512x512" href="/static/img/icons/icon-512.png">
@@ -24,7 +29,7 @@
     <script src="https://cdn.botpress.cloud/webchat/v3.5/inject.js"></script>
     <script src="https://files.bpcontent.cloud/2025/12/26/15/20251226150220-M60F968Y.js" defer></script>
     <script>
-        (function() {
+        (function () {
             const theme = localStorage.getItem('theme') || 'dark';
             if (theme === 'dark') {
                 document.documentElement.classList.add('dark-mode');
@@ -32,6 +37,7 @@
         })();
     </script>
 </head>
+
 <body>
     <header>
         <nav>
@@ -40,10 +46,14 @@
             </div>
             <div class="nav-menu">
                 <ul>
-                    <li><a href="/" class="nav-link {% if request.path == '/' %}active{% endif %}" aria-current="page">Home</a></li>
-                    <li><a href="/servizi" class="nav-link {% if request.path == '/servizi' %}active{% endif %}">Servizi</a></li>
-                    <li><a href="/preventivo" class="nav-link {% if request.path == '/preventivo' %}active{% endif %}">Preventivo</a></li>
-                    <li><a href="/contatti" class="nav-link {% if request.path == '/contatti' %}active{% endif %}">Contatti</a></li>
+                    <li><a href="/" class="nav-link {% if request.path == '/' %}active{% endif %}"
+                            aria-current="page">Home</a></li>
+                    <li><a href="/servizi"
+                            class="nav-link {% if request.path == '/servizi' %}active{% endif %}">Servizi</a></li>
+                    <li><a href="/preventivo"
+                            class="nav-link {% if request.path == '/preventivo' %}active{% endif %}">Preventivo</a></li>
+                    <li><a href="/contatti"
+                            class="nav-link {% if request.path == '/contatti' %}active{% endif %}">Contatti</a></li>
                 </ul>
                 <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode"></button>
             </div>
@@ -58,14 +68,21 @@
     <!-- Pulsante Torna Su -->
     <button class="scroll-to-top" id="scrollToTop" aria-label="Torna su">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M12 19V5M5 12l7-7 7 7"/>
+            <path d="M12 19V5M5 12l7-7 7 7" />
         </svg>
     </button>
-    
+
     <!-- Cookie Banner -->
     <div class="cookie-banner" id="cookieBanner">
         <div class="cookie-content">
-            <p>Noi (www.pinizzotto.it) e terze parti selezionate raccogliamo informazioni personali come specificato nella <a href="#" id="cookiePrivacyLink">privacy policy</a> e utilizziamo cookie o tecnologie simili per finalità tecniche e, con il tuo consenso, anche per le finalità di <strong>funzionalità, esperienza e misurazione</strong> come specificato nella <a href="#" id="cookiePolicyLink">cookie policy</a>. Puoi liberamente prestare, rifiutare o revocare il tuo consenso, in qualsiasi momento, accedendo al pannello delle preferenze. Il rifiuto del consenso può rendere non disponibili le relative funzioni.<br>Usa il pulsante "Accetta" per acconsentire. Usa il pulsante "Rifiuta" per continuare senza accettare.</p>
+            <p>Noi (www.pinizzotto.it) e terze parti selezionate raccogliamo informazioni personali come specificato
+                nella <a href="#" id="cookiePrivacyLink">privacy policy</a> e utilizziamo cookie o tecnologie simili per
+                finalità tecniche e, con il tuo consenso, anche per le finalità di <strong>funzionalità, esperienza e
+                    misurazione</strong> come specificato nella <a href="#" id="cookiePolicyLink">cookie policy</a>.
+                Puoi liberamente prestare, rifiutare o revocare il tuo consenso, in qualsiasi momento, accedendo al
+                pannello delle preferenze. Il rifiuto del consenso può rendere non disponibili le relative
+                funzioni.<br>Usa il pulsante "Accetta" per acconsentire. Usa il pulsante "Rifiuta" per continuare senza
+                accettare.</p>
             <div class="cookie-buttons">
                 <button class="btn-cookie customize" id="customizeCookies">Scopri di più e personalizza</button>
                 <button class="btn-cookie decline" id="declineCookies">Rifiuta</button>
@@ -78,13 +95,14 @@
         <div class="footer-content">
             <div class="footer-main">
                 <div class="footer-logo">
-                    <img src="/static/img/icons/logo_nero.png" alt="Pinizzotto" class="footer-logo-img footer-logo-light">
+                    <img src="/static/img/icons/logo_nero.png" alt="Pinizzotto"
+                        class="footer-logo-img footer-logo-light">
                     <img src="/static/img/icons/logo.png" alt="Pinizzotto" class="footer-logo-img footer-logo-dark">
                 </div>
                 <div class="footer-info">
                     <p class="footer-address">Via Nazionale, 406/A - 23010 Piantedo SO Italy</p>
                     <p class="footer-contacts">
-                        Tel <a href="tel:+390342683265">+39 0342 683265</a> - 
+                        Tel <a href="tel:+390342683265">+39 0342 683265</a> -
                         <a href="mailto:info@pinizzotto.it">info@pinizzotto.it</a>
                     </p>
                     <p class="footer-legal">P. IVA / C.F. e R. Imp.: 01035420148</p>
@@ -92,14 +110,18 @@
                 <div class="footer-social">
                     <p class="footer-social-title">Seguici</p>
                     <div class="footer-social-icons">
-                        <a href="https://www.facebook.com/pinizzottoaziendagrafica" target="_blank" rel="noopener" class="social-icon-link" aria-label="Facebook">
+                        <a href="https://www.facebook.com/pinizzottoaziendagrafica" target="_blank" rel="noopener"
+                            class="social-icon-link" aria-label="Facebook">
                             <svg viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                                <path
+                                    d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
                             </svg>
                         </a>
-                        <a href="https://www.instagram.com/pinizzottografica/" target="_blank" rel="noopener" class="social-icon-link" aria-label="Instagram">
+                        <a href="https://www.instagram.com/pinizzottografica/" target="_blank" rel="noopener"
+                            class="social-icon-link" aria-label="Instagram">
                             <svg viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+                                <path
+                                    d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
                             </svg>
                         </a>
                     </div>
@@ -118,46 +140,71 @@
             </div>
             <div class="privacy-modal-body">
                 <p><strong>Gentile Cliente,</strong></p>
-                <p>Desideriamo informarla che il D.lgs. n. 195 del 30 giugno 2003 ("Codice in materia di protezione dei dati personali") prevede la tutela delle persone e di altri soggetti rispetto al trattamento dei dati personali.</p>
-                <p>Secondo la normativa indicata, tale trattamento sarà improntato ai principi di correttezza, liceità e trasparenza e di tutela della Sua riservatezza e dei Suoi diritti.</p>
-                
+                <p>Desideriamo informarla che il D.lgs. n. 195 del 30 giugno 2003 ("Codice in materia di protezione dei
+                    dati personali") prevede la tutela delle persone e di altri soggetti rispetto al trattamento dei
+                    dati personali.</p>
+                <p>Secondo la normativa indicata, tale trattamento sarà improntato ai principi di correttezza, liceità e
+                    trasparenza e di tutela della Sua riservatezza e dei Suoi diritti.</p>
+
                 <p>Ai sensi dell'articolo 13 del D.lgs. n.196/2003, pertanto, Le forniamo le seguenti informazioni:</p>
-                
+
                 <ol>
-                    <li>I dati da Lei forniti verranno trattati esclusivamente al fine di permetterle di contattarci tramite il sito www.graficapinizzotto.it;</li>
+                    <li>I dati da Lei forniti verranno trattati esclusivamente al fine di permetterle di contattarci
+                        tramite il sito www.graficapinizzotto.it;</li>
                     <li>Il trattamento sarà effettuato con modalità informatizzata.</li>
-                    <li>Il conferimento dei dati, a Lei Facoltativo e spontaneo, è utile a fornire tali dati comporti l'impossibilità di usufruire dei servizi offerti dal sito Web www.graficapinizzotto.it.</li>
-                    <li>I Suoi dati personali e i contenuti non saranno comunicati ad altri soggetti, né saranno oggetto di diffusione.</li>
-                    <li>Il titolare del trattamento è: GRAFICO PINIZZOTTO di Pinizzotto Marcello - Piantedo (SO) - Via Nazionale, 406/A.</li>
+                    <li>Il conferimento dei dati, a Lei Facoltativo e spontaneo, è utile a fornire tali dati comporti
+                        l'impossibilità di usufruire dei servizi offerti dal sito Web www.graficapinizzotto.it.</li>
+                    <li>I Suoi dati personali e i contenuti non saranno comunicati ad altri soggetti, né saranno oggetto
+                        di diffusione.</li>
+                    <li>Il titolare del trattamento è: GRAFICO PINIZZOTTO di Pinizzotto Marcello - Piantedo (SO) - Via
+                        Nazionale, 406/A.</li>
                     <li>Il responsabile del trattamento è: il sig. Marcello Pinizzotto.</li>
-                    <li>In ogni momento potrà esercitare i Suoi diritti nei confronti del titolare del trattamento, ai sensi dell'art. 7 - Diritto di accesso ai dati personali ed altri diritti del D.lgs.195/03 che riproduciamo integralmente più sotto.</li>
+                    <li>In ogni momento potrà esercitare i Suoi diritti nei confronti del titolare del trattamento, ai
+                        sensi dell'art. 7 - Diritto di accesso ai dati personali ed altri diritti del D.lgs.195/03 che
+                        riproduciamo integralmente più sotto.</li>
                 </ol>
 
                 <h3>Decreto Legislativo n.196/2003</h3>
                 <h4>Art. 7 - Diritto di accesso ai dati personali ed altri diritti</h4>
 
                 <ol>
-                    <li>L'interessato ha diritto di ottenere la conferma dell'esistenza o meno di dati personali che lo riguardano, anche se non ancora registrati, e la loro comunicazione in forma intelligibile.</li>
+                    <li>L'interessato ha diritto di ottenere la conferma dell'esistenza o meno di dati personali che lo
+                        riguardano, anche se non ancora registrati, e la loro comunicazione in forma intelligibile.</li>
                     <li>L'interessato ha diritto di ottenere l'indicazione:
                         <ul>
                             <li>a. dell'origine dei dati personali;</li>
                             <li>b. delle finalità e modalità del trattamento;</li>
-                            <li>c. della logica applicata in caso di trattamento effettuato con l'ausilio di strumenti elettronici;</li>
-                            <li>d. degli estremi identificativi del titolare, dei responsabili e del rappresentante designato ai sensi dell'articolo 5, comma 2;</li>
-                            <li>e. dei soggetti o delle categorie di soggetti ai quali i dati personali possono essere comunicati o che possono venirne a conoscenza in qualità di rappresentante designato nel territorio dello Stato, di responsabili o incaricati.</li>
+                            <li>c. della logica applicata in caso di trattamento effettuato con l'ausilio di strumenti
+                                elettronici;</li>
+                            <li>d. degli estremi identificativi del titolare, dei responsabili e del rappresentante
+                                designato ai sensi dell'articolo 5, comma 2;</li>
+                            <li>e. dei soggetti o delle categorie di soggetti ai quali i dati personali possono essere
+                                comunicati o che possono venirne a conoscenza in qualità di rappresentante designato nel
+                                territorio dello Stato, di responsabili o incaricati.</li>
                         </ul>
                     </li>
                     <li>L'interessato ha diritto di ottenere:
                         <ul>
-                            <li>a. l'aggiornamento, la rettificazione ovvero, quando vi ha interesse, l'integrazione dei dati;</li>
-                            <li>b. la cancellazione, la trasformazione in forma anonima o il blocco dei dati trattati in violazione di legge, compresi quelli di cui non è necessaria la conservazione in relazione agli scopi per i quali i dati sono stati raccolti o successivamente trattati;</li>
-                            <li>c. l'attestazione che le operazioni di cui alle lettere a) e b) sono state portate a conoscenza, anche per quanto riguarda il loro contenuto, di coloro ai quali i dati sono stati comunicati o diffusi, eccettuato il caso in cui tale adempimento si rivela impossibile o comporta un impiego di mezzi manifestamente sproporzionato rispetto al diritto tutelato.</li>
+                            <li>a. l'aggiornamento, la rettificazione ovvero, quando vi ha interesse, l'integrazione dei
+                                dati;</li>
+                            <li>b. la cancellazione, la trasformazione in forma anonima o il blocco dei dati trattati in
+                                violazione di legge, compresi quelli di cui non è necessaria la conservazione in
+                                relazione agli scopi per i quali i dati sono stati raccolti o successivamente trattati;
+                            </li>
+                            <li>c. l'attestazione che le operazioni di cui alle lettere a) e b) sono state portate a
+                                conoscenza, anche per quanto riguarda il loro contenuto, di coloro ai quali i dati sono
+                                stati comunicati o diffusi, eccettuato il caso in cui tale adempimento si rivela
+                                impossibile o comporta un impiego di mezzi manifestamente sproporzionato rispetto al
+                                diritto tutelato.</li>
                         </ul>
                     </li>
                     <li>L'interessato ha diritto di opporsi, in tutto o in parte:
                         <ul>
-                            <li>a. per motivi legittimi al trattamento dei dati personali che lo riguardano, ancorché pertinenti allo scopo della raccolta;</li>
-                            <li>b. al trattamento di dati personali che lo riguardano a fini di invio di materiale pubblicitario o di vendita diretta o per il compimento di ricerche di mercato o di comunicazione commerciale.</li>
+                            <li>a. per motivi legittimi al trattamento dei dati personali che lo riguardano, ancorché
+                                pertinenti allo scopo della raccolta;</li>
+                            <li>b. al trattamento di dati personali che lo riguardano a fini di invio di materiale
+                                pubblicitario o di vendita diretta o per il compimento di ricerche di mercato o di
+                                comunicazione commerciale.</li>
                         </ul>
                     </li>
                 </ol>
@@ -166,4 +213,5 @@
     </div>
     <script src="/static/js/main.js?v=5.2" defer></script>
 </body>
+
 </html>
