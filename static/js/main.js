@@ -20,39 +20,32 @@ document.addEventListener('DOMContentLoaded', function () {
     };
     applySafariHighlightFix();
     window.addEventListener('load', applySafariHighlightFix);
-    const themeToggle = document.getElementById('themeToggle');
+    const themeRadios = document.querySelectorAll('input[name="theme-toggle"]');
     const htmlElement = document.documentElement;
 
     // Load saved theme
     const savedTheme = localStorage.getItem('theme') || 'light';
+    const activeRadio = document.querySelector(`input[name="theme-toggle"][value="${savedTheme}"]`);
+    if (activeRadio) {
+        activeRadio.checked = true;
+    }
+    
     if (savedTheme === 'dark') {
         htmlElement.classList.add('dark-mode');
     }
 
-    // Toggle theme with smooth transition
-    if (themeToggle) {
-        themeToggle.addEventListener('click', function (e) {
-            e.preventDefault();
-            htmlElement.classList.toggle('dark-mode');
-            const isDarkMode = htmlElement.classList.contains('dark-mode');
-            localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
-
-            // Add ripple effect
-            const ripple = document.createElement('span');
-            ripple.style.cssText = `
-                position: absolute;
-                width: 100%;
-                height: 100%;
-                top: 0;
-                left: 0;
-                background: radial-gradient(circle, rgba(255,255,255,0.5) 0%, transparent 70%);
-                pointer-events: none;
-                animation: ripple 0.6s ease-out;
-            `;
-            this.appendChild(ripple);
-            setTimeout(() => ripple.remove(), 600);
+    // Toggle theme on radio change
+    themeRadios.forEach(radio => {
+        radio.addEventListener('change', function () {
+            const theme = this.value;
+            if (theme === 'dark') {
+                htmlElement.classList.add('dark-mode');
+            } else {
+                htmlElement.classList.remove('dark-mode');
+            }
+            localStorage.setItem('theme', theme);
         });
-    }
+    });
 
     // ===== HAMBURGER MENU =====
     const hamburger = document.getElementById('hamburger');
@@ -69,6 +62,15 @@ document.addEventListener('DOMContentLoaded', function () {
             navMenu.classList.toggle('active');
             const isOpen = hamburger.classList.contains('active');
             hamburger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+            
+            // Lock body scroll when menu is open
+            if (isOpen) {
+                document.body.style.overflow = 'hidden';
+                document.body.style.touchAction = 'none';
+            } else {
+                document.body.style.overflow = '';
+                document.body.style.touchAction = '';
+            }
         };
 
         hamburger.addEventListener('click', toggleMenu);
@@ -94,6 +96,8 @@ document.addEventListener('DOMContentLoaded', function () {
                         setTimeout(() => {
                             navMenu.classList.remove('active');
                             navMenu.classList.remove('closing');
+                            document.body.style.overflow = '';
+                            document.body.style.touchAction = '';
                             window.location.href = href;
                         }, 250);
                         return;

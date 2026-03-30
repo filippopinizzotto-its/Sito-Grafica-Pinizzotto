@@ -55,12 +55,41 @@
                     <li><a href="/contatti"
                             class="nav-link {% if request.path == '/contatti' %}active{% endif %}">Contatti</a></li>
                 </ul>
-                <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode"></button>
             </div>
-            <div class="hamburger" id="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
+            <div class="nav-actions">
+                <div class="theme-switcher-wrapper">
+                    <div class="liquid-switcher">
+                        <input type="radio" name="theme-toggle" id="theme-light" value="light">
+                        <label for="theme-light" class="switcher-label" title="Tema Chiaro">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" class="sun-icon">
+                                <circle cx="12" cy="12" r="4"></circle>
+                                <path d="M12 2v2"></path>
+                                <path d="M12 20v2"></path>
+                                <path d="m4.93 4.93 1.41 1.41"></path>
+                                <path d="m17.66 17.66 1.41 1.41"></path>
+                                <path d="M2 12h2"></path>
+                                <path d="M22 12h2"></path>
+                                <path d="m6.34 17.66-1.41 1.41"></path>
+                                <path d="m19.07 4.93-1.41 1.41"></path>
+                            </svg>
+                        </label>
+
+                        <input type="radio" name="theme-toggle" id="theme-dark" value="dark">
+                        <label for="theme-dark" class="switcher-label" title="Tema Scuro">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" class="moon-icon">
+                                <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+                            </svg>
+                        </label>
+                        <div class="switcher-indicator"></div>
+                    </div>
+                </div>
+                <div class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
             </div>
         </nav>
     </header>
