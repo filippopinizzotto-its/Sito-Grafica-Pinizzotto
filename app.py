@@ -17,8 +17,12 @@ load_dotenv(BASE_DIR / ".env")
 
 app = Flask(__name__)
 
-cors_origins = [origin.strip() for origin in os.getenv("CORS_ORIGINS", "http://localhost:5000").split(",") if origin.strip()]
-CORS(app, resources={r"/api/*": {"origins": cors_origins}, r"/health": {"origins": cors_origins}})
+def get_cors_origins():
+    """Recupera gli origini CORS ammessi dall'ambiente."""
+    origins = os.getenv("CORS_ORIGINS", "http://localhost:5000,http://127.0.0.1:5000").split(",")
+    return [o.strip() for o in origins if o.strip()]
+
+CORS(app, resources={r"/api/*": {"origins": get_cors_origins()}, r"/health": {"origins": get_cors_origins()}})
 
 # Definizione dei parametri IA (verranno ricaricati ogni volta per garantire affidabilità)
 def get_gemini_config():
@@ -54,10 +58,12 @@ def home():
 
 @app.route("/health")
 def health():
+    key, model, url = get_gemini_config()
     return jsonify({
         "success": True,
-        "api_key_loaded": bool(API_KEY),
-        "model": GEMINI_MODEL
+        "api_key_loaded": bool(key),
+        "model": model,
+        "env": os.getenv("FLASK_ENV", "production")
     })
 
 @app.route("/servizi")
