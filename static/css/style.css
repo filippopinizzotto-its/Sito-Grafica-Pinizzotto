@@ -2313,94 +2313,113 @@ html.dark-mode .page-header-badge {
 }
 
 .contact-grid {
-    display: grid;
-    grid-template-columns: 1fr 1.5fr;
+    display: flex;
+    flex-direction: column;
     gap: 3rem;
 }
 
-/* Contact Info - Animazioni migliorate */
-.contact-info {
-    background: var(--bg-card);
-    backdrop-filter: blur(24px);
-    -webkit-backdrop-filter: blur(24px);
-    padding: 3rem;
-    border-radius: 24px;
-    box-shadow: var(--shadow-md);
-    border: 1px solid var(--border-glass);
-    display: flex;
-    flex-direction: column;
+/* Nuova riga 3-Cards per Info */
+.contact-cards-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
     gap: 2rem;
-    animation: slideInLeft 0.8s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+    margin-bottom: 2rem;
 }
 
-@keyframes slideInLeft {
-    from {
-        opacity: 0;
-        transform: translateX(-40px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-.contact-info h2 {
-    font-size: 2rem;
-    color: var(--text-primary);
-    position: relative;
-    padding-bottom: 1rem;
-}
-
-.contact-info h2::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 60px;
-    height: 3px;
-    background: linear-gradient(90deg, var(--primary), var(--secondary));
-    border-radius: 2px;
-    animation: expandWidth 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.3s backwards;
-}
-
-@keyframes expandWidth {
-    from {
-        width: 0;
-    }
-
-    to {
-        width: 60px;
-    }
-}
-
-/* Info Items - Stagger animation */
-.info-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 1.5rem;
-    padding: 1.5rem;
-    background: var(--bg-secondary);
-    border-radius: 16px;
-    transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-    box-shadow: var(--shadow-sm);
+.contact-info-card {
+    background: var(--bg-card);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    padding: 2.5rem;
+    border-radius: 24px;
     border: 1px solid var(--border-color);
     position: relative;
     overflow: hidden;
-    animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
 }
 
-.info-item:nth-child(2) {
-    animation-delay: 0.1s;
+.contact-info-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 24px 48px -12px rgba(0, 0, 0, 0.1), 0 0 25px rgba(181, 21, 94, 0.15);
+    border-color: var(--primary);
 }
 
-.info-item:nth-child(3) {
-    animation-delay: 0.2s;
+.contact-info-card .card-icon {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
 }
 
-.info-item:nth-child(4) {
-    animation-delay: 0.3s;
+.contact-info-card h4 {
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    margin-bottom: 0.25rem;
 }
+
+.contact-info-card p {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    line-height: 1.5;
+}
+
+/* Sezione Split Mappa + Form */
+.contact-split-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: start;
+}
+
+.contact-map-container {
+    height: 100%;
+    min-height: 500px;
+    background: var(--bg-card);
+    border-radius: 32px;
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-md);
+    position: relative;
+}
+
+.contact-map-container iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    filter: grayscale(0.2) contrast(1.1);
+}
+
+.contact-form-container {
+    background: var(--bg-card);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    padding: 3.5rem;
+    border-radius: 32px;
+    border: 1px solid var(--border-glass);
+    box-shadow: var(--shadow-lg);
+}
+
+@media (max-width: 1024px) {
+    .contact-cards-row {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .contact-split-section {
+        grid-template-columns: 1fr;
+    }
+    
+    .contact-map-container {
+        min-height: 400px;
+    }
+}
+
+/* Contact Info - Animazioni migliorate */
+.contact-info-card:nth-child(1) { animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.1s backwards; }
+.contact-info-card:nth-child(2) { animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.2s backwards; }
+.contact-info-card:nth-child(3) { animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.3s backwards; }
 
 @keyframes fadeInUp {
     from {
@@ -4743,4 +4762,51 @@ button[class*="botpress"],
         right: auto !important;
         bottom: 20px !important;
     }
+}
+
+/* ===== PREMIUM SVG ICONS ===== */
+.premium-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s var(--anim-ease);
+}
+
+.premium-icon svg {
+    width: 100%;
+    height: 100%;
+}
+
+.premium-icon svg path {
+    fill: url(#brand-gradient);
+    transition: all 0.3s var(--anim-ease);
+}
+
+.pillar-card:hover .premium-icon,
+.contact-info-card:hover .premium-icon,
+.service-card:hover .premium-icon {
+    transform: scale(1.1) rotate(5deg);
+}
+
+.card-icon.premium-icon {
+    width: 48px;
+    height: 48px;
+}
+
+.pillar-icon.premium-icon {
+    width: 64px;
+    height: 64px;
+    margin-bottom: 1.5rem;
+}
+
+.list-icon.premium-icon {
+    width: 18px;
+    height: 18px;
+    margin-right: 8px;
+    vertical-align: middle;
+}
+
+.btn-icon.premium-icon {
+    width: 20px;
+    height: 20px;
 }

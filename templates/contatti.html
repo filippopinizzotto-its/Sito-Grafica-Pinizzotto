@@ -12,70 +12,82 @@
 
     <section class="contact-section">
         <div class="contact-grid">
-            <div class="contact-info">
-                <h2>Dove Trovarci</h2>
-                <div class="info-item map">
-                    <div class="info-top">
-                        <span class="info-icon">📍</span>
-                        <div>
-                            <h4>Indirizzo</h4>
-                            <p>Via Nazionale 406/A, Piantedo</p>
+            <!-- 1. Sezione Split Mappa + Form (Spostata sopra) -->
+            <div class="contact-split-section">
+                <!-- Colonna Mappa -->
+                <div class="contact-map-container">
+                    <iframe title="Mappa - Pinizzotto Azienda Grafica"
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2780.5!2d9.43337!3d46.138468!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47846cc5d791fbe9%3A0xa5f000c3b45b9171!2sPinizzotto%20Azienda%20Grafica!5e0!3m2!1sit!2sit!4v1640000000000!5m2!1sit!2sit"
+                        loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+                </div>
+
+                <!-- Colonna Form -->
+                <div class="contact-form-container">
+                    <form id="contactForm" method="POST" action="https://formsubmit.co/pinizzottofilippo04@gmail.com"
+                        data-real-send>
+                        <input type="hidden" name="_subject" value="Nuovo messaggio contatti - Pinizzotto">
+                        <input type="hidden" name="_captcha" value="false">
+                        <input type="hidden" name="_template" value="table">
+                        <input type="text" name="_honey" style="display:none">
+                        <input type="hidden" name="_next" value="/contatti?success=true">
+                        <h2>Inviaci un Messaggio</h2>
+                        <div class="form-group">
+                            <input type="text" id="name" name="nome" placeholder=" " required>
+                            <label for="name">Nome</label>
                         </div>
-                    </div>
-                    <div class="map-embed">
-                        <iframe title="Mappa - Pinizzotto Azienda Grafica"
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2780.5!2d9.43337!3d46.138468!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47846cc5d791fbe9%3A0xa5f000c3b45b9171!2sPinizzotto%20Azienda%20Grafica!5e0!3m2!1sit!2sit!4v1640000000000!5m2!1sit!2sit"
-                            width="100%" height="320" style="border:0;" loading="lazy"
-                            referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
-                    </div>
-                </div>
-                <div class="info-item">
-                    <span class="info-icon">📧</span>
-                    <div>
-                        <h4>Email</h4>
-                        <p>info@pinizzotto.it</p>
-                    </div>
-                </div>
-                <div class="info-item">
-                    <span class="info-icon">📞</span>
-                    <div>
-                        <h4>Telefono</h4>
-                        <p>+39 0342 683265</p>
-                    </div>
+                        <div class="form-group">
+                            <input type="email" id="email" name="email" placeholder=" " required>
+                            <label for="email">Email</label>
+                        </div>
+                        <a href="#" class="privacy-link" id="privacyLink">Leggi l'informativa sulla privacy (D.Lgs
+                            196/2003)</a>
+                        <div class="form-group checkbox">
+                            <input type="checkbox" id="privacy" name="privacy" required>
+                            <label for="privacy">Ho letto l'informativa sulla privacy e acconsento al trattamento dei
+                                miei dati personali</label>
+                        </div>
+                        <div class="form-group">
+                            <textarea id="message" name="messaggio" rows="5" placeholder=" " required></textarea>
+                            <label for="message">Messaggio</label>
+                        </div>
+                        <button type="submit" class="btn btn-primary">
+                            Invia Messaggio
+                            <span class="btn-shine"></span>
+                        </button>
+                    </form>
                 </div>
             </div>
 
-            <form class="contact-form" id="contactForm" method="POST"
-                action="https://formsubmit.co/pinizzottofilippo04@gmail.com" data-real-send>
-                <input type="hidden" name="_subject" value="Nuovo messaggio contatti - Pinizzotto">
-                <input type="hidden" name="_captcha" value="false">
-                <input type="hidden" name="_template" value="table">
-                <input type="text" name="_honey" style="display:none">
-                <input type="hidden" name="_next" value="/contatti?success=true">
-                <h2>Inviaci un Messaggio</h2>
-                <div class="form-group">
-                    <input type="text" id="name" name="nome" placeholder=" " required>
-                    <label for="name">Nome</label>
+            <!-- 2. Riga Info Cards (Spostata sotto) -->
+            <div class="contact-cards-row">
+                <div class="contact-info-card">
+                    <div class="card-icon premium-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 0 0-1.01.24l-2.2 2.2c-2.83-1.44-5.15-3.75-6.59-6.58l2.2-2.21a.96.96 0 0 0 .24-1.01c-.36-1.11-.56-2.3-.56-3.53 0-.55-.45-1-1-1H3.5c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.5c0-.55-.45-1-1-1z"/>
+                        </svg>
+                    </div>
+                    <h4>Telefono</h4>
+                    <p>+39 0342 683265</p>
                 </div>
-                <div class="form-group">
-                    <input type="email" id="email" name="email" placeholder=" " required>
-                    <label for="email">Email</label>
+                <div class="contact-info-card">
+                    <div class="card-icon premium-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                        </svg>
+                    </div>
+                    <h4>Email</h4>
+                    <p>info@pinizzotto.it</p>
                 </div>
-                <a href="#" class="privacy-link" id="privacyLink">Leggi l'informativa sulla privacy (D.Lgs 196/2003)</a>
-                <div class="form-group checkbox">
-                    <input type="checkbox" id="privacy" name="privacy" required>
-                    <label for="privacy">Ho letto l'informativa sulla privacy e acconsento al trattamento dei miei dati
-                        personali</label>
+                <div class="contact-info-card">
+                    <div class="card-icon premium-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"/>
+                        </svg>
+                    </div>
+                    <h4>Indirizzo</h4>
+                    <p>Via Nazionale 406/A,<br>Piantedo (SO) Italy</p>
                 </div>
-                <div class="form-group">
-                    <textarea id="message" name="messaggio" rows="5" placeholder=" " required></textarea>
-                    <label for="message">Messaggio</label>
-                </div>
-                <button type="submit" class="btn btn-primary">
-                    Invia Messaggio
-                    <span class="btn-shine"></span>
-                </button>
-            </form>
+            </div>
         </div>
     </section>
 
