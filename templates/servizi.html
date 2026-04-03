@@ -5,8 +5,9 @@
 {% block content %}
 <main>
     <section class="page-header">
-        <h1 class="reveal-text">I Nostri Servizi</h1>
-        <p class="subtitle">Soluzioni professionali per ogni tua esigenza</p>
+        <span class="page-header-badge">Cosa Facciamo</span>
+        <h1 class="reveal-text">I Nostri <span class="gradient-accent">Servizi</span></h1>
+        <p class="subtitle">Soluzioni di stampa e design per brand che vogliono distinguersi</p>
     </section>
 
     <section class="services">
@@ -15,14 +16,15 @@
                 <img src="/static/img/portfolio/stampa.jpeg" alt="Stampa" onerror="this.style.background='linear-gradient(135deg, #667eea 0%, #764ba2 100%)'">
             </div>
             <div class="service-content">
-                <div class="service-badge">Stampa</div>
-                <h2>Stampa Professionale</h2>
-                <p>Biglietti da visita, brochure, manifesti e molto altro.<br>Qualità premium per dare vita alle tue idee.</p>
+                <div class="service-badge">Stampa Premium</div>
+                <h2>Esperienza di <span class="gradient-accent">Stampa</span></h2>
+                <p>Dal piccolo formato al packaging complesso. Utilizziamo carte certificate e tecnologie di stampa all'avanguardia per risultati cromatici impeccabili.</p>
                 <ul class="service-features">
-                    <li>✓ Alta qualità di stampa</li>
-                    <li>✓ Carta premium</li>
-                    <li>✓ Consegna rapida</li>
+                    <li>✓ Offset e Digitale di alta qualità</li>
+                    <li>✓ Nobilitazioni e Finiture sartoriali</li>
+                    <li>✓ Campionature rapide e precise</li>
                 </ul>
+                <a href="/preventivo" class="service-cta-link">Richiedi un preventivo →</a>
             </div>
         </div>
         
@@ -31,23 +33,29 @@
                 <img src="/static/img/portfolio/grafica.jpg" alt="Grafica" onerror="this.style.background='linear-gradient(135deg, #f093fb 0%, #f5576c 100%)'">
             </div>
             <div class="service-content">
-                <div class="service-badge">Grafica</div>
-                <h2>Design Personalizzato</h2>
-                <p>Progetti grafici su misura per il tuo brand: dal logo design al materiale marketing completo.</p>
+                <div class="service-badge">Design Creativo</div>
+                <h2>Design <span class="gradient-accent">Identitario</span></h2>
+                <p>Non solo estetica, ma strategia. Costruiamo l'immagine del tuo brand curando ogni dettaglio visivo, dal logo alla comunicazione coordinata.</p>
                 <ul class="service-features">
-                    <li>✓ Design originale</li>
-                    <li>✓ Revisioni illimitate</li>
-                    <li>✓ File sorgente inclusi</li>
+                    <li>✓ Brand Identity & Logo Design</li>
+                    <li>✓ Concept creativi per campagne</li>
+                    <li>✓ Progettazione tecnica esecutiva</li>
                 </ul>
+                <a href="/preventivo" class="service-cta-link">Parliamo del tuo brand →</a>
             </div>
         </div>
     </section>
 
     <!-- Sezione categorie servizi -->
     <section class="category-section">
+        <div class="section-header-block">
+            <span class="section-badge">Il Catalogo</span>
+            <h2>Tutto ciò che <span class="gradient-accent">Realizziamo</span></h2>
+            <p>Dalla comunicazione aziendale al settore specializzato: trova il prodotto giusto per te.</p>
+        </div>
         <div class="category-grid">
             <!-- Comunicazione Aziendale -->
-            <div class="category-card" data-tilt>
+            <div class="category-card">
                 <h3>Comunicazione Aziendale</h3>
                 <ul class="category-list">
                     <li>Dépliant</li>
@@ -60,7 +68,7 @@
             </div>
 
             <!-- Biglietti da Visita -->
-            <div class="category-card" data-tilt>
+            <div class="category-card">
                 <h3>Biglietti da Visita</h3>
                 <ul class="category-list">
                     <li>Personalizzati</li>
@@ -73,7 +81,7 @@
             </div>
 
             <!-- Comunicazione Promozionale -->
-            <div class="category-card" data-tilt>
+            <div class="category-card">
                 <h3>Comunicazione Promozionale</h3>
                 <ul class="category-list">
                     <li>Volantini e Flyer</li>
@@ -88,7 +96,7 @@
 
         <div class="category-grid">
             <!-- Blocchi Copiativi, Appunti, Numerati -->
-            <div class="category-card" data-tilt>
+            <div class="category-card">
                 <h3>Blocchi Copiativi, Appunti, Numerati</h3>
                 <ul class="category-list">
                     <li>Blocchi Copiativi</li>
@@ -100,7 +108,7 @@
             </div>
 
             <!-- Calendari e Agende 2026 -->
-            <div class="category-card" data-tilt>
+            <div class="category-card">
                 <h3>Calendari e Agende 2026</h3>
                 <ul class="category-list">
                     <li>Agenda 2026</li>
@@ -112,7 +120,7 @@
             </div>
 
             <!-- Ricerca per settori specifici -->
-            <div class="category-card" data-tilt>
+            <div class="category-card">
                 <h3>Ricerca per Settori Specifici</h3>
                 <ul class="category-list">
                     <li>Partecipazioni, Libretti Messa, Tableau</li>
@@ -121,6 +129,18 @@
                     <li>Ristorazione, Hotel</li>
                     <li>Studi Medici e Laboratori Analisi</li>
                 </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="mega-cta">
+        <div class="mega-cta-content">
+            <span class="section-badge">Pronto a Partire?</span>
+            <h2>Diamo forma alla tua <span class="gradient-accent">Idea</span></h2>
+            <p>Ogni grande progetto inizia con un primo passo. Richiedi ora un preventivo gratuito o contattaci per una consulenza personalizzata.</p>
+            <div class="cta-actions">
+                <a href="/preventivo" class="btn btn-primary btn-glow">Ottieni Preventivo</a>
+                <a href="/contatti" class="btn btn-outline btn-glass">Contattaci →</a>
             </div>
         </div>
     </section>

@@ -5,14 +5,15 @@
 {% block content %}
 <main>
     <section class="page-header">
-        <h1 class="reveal-text">Parliamone</h1>
-        <p class="subtitle">Siamo qui per realizzare il tuo progetto</p>
+        <span class="page-header-badge">Contattaci</span>
+        <h1 class="reveal-text">Parliamo del tuo <span class="gradient-accent">Progetto</span></h1>
+        <p class="subtitle">Siamo a Piantedo, ma lavoriamo per brand di tutta Italia</p>
     </section>
 
     <section class="contact-section">
         <div class="contact-grid">
             <div class="contact-info">
-                <h2>Informazioni</h2>
+                <h2>Dove Trovarci</h2>
                 <div class="info-item map">
                     <div class="info-top">
                         <span class="info-icon">📍</span>
@@ -22,7 +23,10 @@
                         </div>
                     </div>
                     <div class="map-embed">
-                        <iframe title="Mappa - Pinizzotto Azienda Grafica" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2780.5!2d9.43337!3d46.138468!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47846cc5d791fbe9%3A0xa5f000c3b45b9171!2sPinizzotto%20Azienda%20Grafica!5e0!3m2!1sit!2sit!4v1640000000000!5m2!1sit!2sit" width="100%" height="320" style="border:0;" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+                        <iframe title="Mappa - Pinizzotto Azienda Grafica"
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2780.5!2d9.43337!3d46.138468!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47846cc5d791fbe9%3A0xa5f000c3b45b9171!2sPinizzotto%20Azienda%20Grafica!5e0!3m2!1sit!2sit!4v1640000000000!5m2!1sit!2sit"
+                            width="100%" height="320" style="border:0;" loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
                     </div>
                 </div>
                 <div class="info-item">
@@ -40,14 +44,15 @@
                     </div>
                 </div>
             </div>
-            
-            <form class="contact-form" id="contactForm" method="POST" action="https://formsubmit.co/pinizzottofilippo04@gmail.com" data-real-send>
+
+            <form class="contact-form" id="contactForm" method="POST"
+                action="https://formsubmit.co/pinizzottofilippo04@gmail.com" data-real-send>
                 <input type="hidden" name="_subject" value="Nuovo messaggio contatti - Pinizzotto">
                 <input type="hidden" name="_captcha" value="false">
                 <input type="hidden" name="_template" value="table">
                 <input type="text" name="_honey" style="display:none">
                 <input type="hidden" name="_next" value="/contatti?success=true">
-                <h2>Inviaci un messaggio</h2>
+                <h2>Inviaci un Messaggio</h2>
                 <div class="form-group">
                     <input type="text" id="name" name="nome" placeholder=" " required>
                     <label for="name">Nome</label>
@@ -59,7 +64,8 @@
                 <a href="#" class="privacy-link" id="privacyLink">Leggi l'informativa sulla privacy (D.Lgs 196/2003)</a>
                 <div class="form-group checkbox">
                     <input type="checkbox" id="privacy" name="privacy" required>
-                    <label for="privacy">Ho letto l'informativa sulla privacy e acconsento al trattamento dei miei dati personali</label>
+                    <label for="privacy">Ho letto l'informativa sulla privacy e acconsento al trattamento dei miei dati
+                        personali</label>
                 </div>
                 <div class="form-group">
                     <textarea id="message" name="messaggio" rows="5" placeholder=" " required></textarea>
@@ -75,22 +81,29 @@
 
     <!-- Sezione Social -->
     <section class="social-section">
-        <h2 class="social-title reveal-text">Seguici sui Social</h2>
-        <p class="subtitle">Facebook e Instagram: contenuti, novità e lavori recenti</p>
+        <div class="section-header-block">
+            <span class="section-badge">Seguici</span>
+            <h2 class="social-title reveal-text">Resta <span class="gradient-accent">Connesso</span></h2>
+            <p class="subtitle">Facebook e Instagram: dietro le quinte, lavori recenti e anteprime esclusive</p>
+        </div>
         <div class="social-grid">
-            <a class="social-card facebook" href="https://www.facebook.com/pinizzottoaziendagrafica" target="_blank" rel="noopener" data-tilt>
+            <a class="social-card facebook" href="https://www.facebook.com/pinizzottoaziendagrafica" target="_blank"
+                rel="noopener">
                 <div class="social-bg"></div>
                 <div class="social-content">
-                    <img class="social-icon-image" src="/static/img/loghi/facebook.png" alt="Facebook" draggable="false" />
+                    <img class="social-icon-image" src="/static/img/loghi/facebook.png" alt="Facebook"
+                        draggable="false" />
                     <h3>Facebook</h3>
                     <p>News, offerte e progetti</p>
                     <span class="social-cta">Vai alla pagina →</span>
                 </div>
             </a>
-            <a class="social-card instagram" href="https://www.instagram.com/pinizzottografica/" target="_blank" rel="noopener" data-tilt>
+            <a class="social-card instagram" href="https://www.instagram.com/pinizzottografica/" target="_blank"
+                rel="noopener">
                 <div class="social-bg"></div>
                 <div class="social-content">
-                    <img class="social-icon-image" src="/static/img/loghi/instagram.png" alt="Instagram" draggable="false" />
+                    <img class="social-icon-image" src="/static/img/loghi/instagram.png" alt="Instagram"
+                        draggable="false" />
                     <h3>Instagram</h3>
                     <p>Portfolio, storie e dietro le quinte</p>
                     <span class="social-cta">Apri il profilo →</span>

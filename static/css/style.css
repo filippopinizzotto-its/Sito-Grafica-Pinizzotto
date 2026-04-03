@@ -3,6 +3,7 @@
         display: none;
     }
 }
+
 /* ===== VARIABILI CSS PREMIUM ===== */
 :root {
     --primary: #d94f7a;
@@ -11,6 +12,8 @@
     --primary-light: #f07fa1;
     --secondary: #e6678c;
     --accent: #fbc2d4;
+    --accent-violet: #a855f7;
+    /* Viola saturo — gradiente titoli (magenta → viola profondo) */
     --pastel-blue: #a8d8e8;
 
     --bg-primary: #fcfcfd;
@@ -1560,10 +1563,8 @@ html.dark-mode .ag-grid::before {
     font-size: clamp(2rem, 5vw, 3.5rem);
     font-weight: 800;
     margin-bottom: 1rem;
-    background: linear-gradient(135deg, var(--primary), var(--secondary));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--text-primary);
+    /* Testo nero per coerenza con stile foto */
 }
 
 .section-subtitle {
@@ -1880,15 +1881,109 @@ html.dark-mode .ag-grid::before {
     font-size: clamp(2.5rem, 6vw, 4rem);
     font-weight: 900;
     margin-bottom: 1rem;
-    background: linear-gradient(135deg, var(--primary), var(--secondary));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--text-primary);
+    /* Testo nero: le parole chiave usano .gradient-accent */
 }
 
 .subtitle {
     font-size: 1.2rem;
     color: var(--text-secondary);
+}
+
+/* ============================================
+   SISTEMA TIPOGRAFICO PREMIUM — Immagine Stile
+   Testo nero bold + parola chiave gradiente rosa→viola
+============================================ */
+
+/* Parola/frase con gradiente magenta premium — 3 stop per massima ricchezza */
+.gradient-accent {
+    background: linear-gradient(
+        135deg,
+        #b5175e  0%,    /* Deep magenta — punto di forza */
+        #d94f7a  48%,   /* Brand primary */
+        #f09ab5  100%   /* Rosa soffusa — apertura luminosa */
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    display: inline;
+    filter: drop-shadow(0 1px 8px rgba(185, 23, 94, 0.18));
+}
+
+/* Badge pill sezione — stile dall'immagine */
+.section-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.35rem 1.1rem;
+    border-radius: 999px;
+    border: 1px solid var(--border-color);
+    background: var(--bg-card);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    color: var(--text-secondary);
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 1.25rem;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+}
+
+html.dark-mode .section-badge {
+    background: rgba(255,255,255,0.06);
+    border-color: rgba(255,255,255,0.1);
+}
+
+/* Wrapper badge+titolo+sottotitolo centrato */
+.section-header-block {
+    text-align: center;
+    margin-bottom: 3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+}
+
+.section-header-block h2 {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 800;
+    color: var(--text-primary);
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    margin-bottom: 0.75rem;
+}
+
+.section-header-block p {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    max-width: 520px;
+    line-height: 1.6;
+}
+
+/* Page header pill badge */
+.page-header-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.35rem 1.1rem;
+    border-radius: 999px;
+    border: 1px solid var(--border-color);
+    background: var(--bg-card);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    color: var(--text-secondary);
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 1rem;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+}
+
+html.dark-mode .page-header-badge {
+    background: rgba(255,255,255,0.06);
+    border-color: rgba(255,255,255,0.1);
 }
 
 /* Reveal Text Animation */
@@ -1963,11 +2058,10 @@ html.dark-mode .ag-grid::before {
 }
 
 .service-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.1), 0 0 30px rgba(217, 79, 122, 0.15);
-    border-color: transparent;
-    /* Nasconde il bordo solido per msotrare il gradiente */
-    background: var(--bg-primary);
+    transform: translateY(-8px) scale(1.005);
+    box-shadow: 0 32px 64px -16px rgba(0, 0, 0, 0.12), 0 0 40px rgba(217, 79, 122, 0.2);
+    border-color: rgba(217, 79, 122, 0.3);
+    background: var(--bg-card);
 }
 
 .service-card:hover::after {
@@ -2004,16 +2098,34 @@ html.dark-mode .ag-grid::before {
 
 .service-badge {
     display: inline-block;
-    padding: 0.5rem 1rem;
-    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    padding: 0.5rem 1.1rem;
+    background: linear-gradient(135deg, #b5175e, #d94f7a);
     color: white;
     border-radius: 50px;
-    font-size: 0.85rem;
-    font-weight: 600;
+    font-size: 0.75rem;
+    font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 1.5px;
     margin-bottom: 1.5rem;
+    box-shadow: 0 4px 12px rgba(181, 23, 94, 0.25);
     width: fit-content;
+}
+
+.service-cta-link {
+    margin-top: 2rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+}
+
+.service-cta-link:hover {
+    gap: 0.8rem;
+    opacity: 0.85;
 }
 
 .service-content h2 {
@@ -2098,10 +2210,10 @@ html.dark-mode .ag-grid::before {
 }
 
 .category-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 16px 32px -8px rgba(0, 0, 0, 0.08), 0 0 24px rgba(217, 79, 122, 0.1);
-    border-color: transparent;
-    background: var(--bg-primary);
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 24px 48px -12px rgba(0, 0, 0, 0.1), 0 0 20px rgba(217, 79, 122, 0.1);
+    border-color: rgba(217, 79, 122, 0.2);
+    background: var(--bg-card);
 }
 
 .category-card:hover::after,
@@ -4289,10 +4401,16 @@ html.dark-mode .why-section::before {
 }
 
 .why-title-accent {
-    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 60%, #a78bfa 100%);
+    background: linear-gradient(
+        135deg,
+        #b5175e  0%,
+        #d94f7a  48%,
+        #f09ab5  100%
+    );
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 1px 8px rgba(185, 23, 94, 0.18));
 }
 
 .why-subtitle {
@@ -4323,25 +4441,25 @@ html.dark-mode .why-section::before {
     display: flex;
     flex-direction: column;
     transition: transform 0.45s var(--anim-ease),
-                box-shadow 0.45s var(--anim-ease),
-                border-color 0.45s var(--anim-ease);
+        box-shadow 0.45s var(--anim-ease),
+        border-color 0.45s var(--anim-ease);
     cursor: default;
     text-decoration: none;
-    box-shadow: 0 4px 24px rgba(0,0,0,0.04);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
 }
 
 html.dark-mode .why-card {
     background: rgba(18, 18, 22, 0.6);
-    box-shadow: 0 8px 40px rgba(0,0,0,0.35);
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.35);
 }
 
 .why-card:hover {
     transform: translateY(-8px);
-    box-shadow: 0 28px 60px rgba(0,0,0,0.11);
+    box-shadow: 0 28px 60px rgba(0, 0, 0, 0.11);
 }
 
 html.dark-mode .why-card:hover {
-    box-shadow: 0 28px 60px rgba(0,0,0,0.55);
+    box-shadow: 0 28px 60px rgba(0, 0, 0, 0.55);
 }
 
 /* Colored left-accent bar */
@@ -4431,9 +4549,11 @@ html.dark-mode .why-card:hover {
 .why-card--gold .why-card-accent {
     background: linear-gradient(180deg, #f5c542 0%, #e8a200 100%);
 }
+
 .why-card--gold .why-icon {
     color: #d49f00;
 }
+
 .why-card--gold:hover .why-card-arrow {
     background: rgba(245, 197, 66, 0.12);
     border-color: #f5c542;
@@ -4444,12 +4564,15 @@ html.dark-mode .why-card:hover {
 .why-card--magenta .why-card-accent {
     background: linear-gradient(180deg, var(--primary-light) 0%, var(--primary-dark) 100%);
 }
+
 .why-card--magenta .why-icon {
     color: var(--primary);
 }
+
 .why-card--magenta:hover {
     border-color: rgba(217, 79, 122, 0.35);
 }
+
 .why-card--magenta:hover .why-card-arrow {
     background: rgba(217, 79, 122, 0.1);
     border-color: var(--primary);
@@ -4460,17 +4583,21 @@ html.dark-mode .why-card:hover {
 .why-card--violet .why-card-accent {
     background: linear-gradient(180deg, #c4b5fd 0%, #7c3aed 100%);
 }
+
 .why-card--violet .why-icon {
     color: #7c3aed;
 }
+
 html.dark-mode .why-card--violet .why-icon {
     color: #c4b5fd;
 }
+
 .why-card--violet:hover .why-card-arrow {
     background: rgba(124, 58, 237, 0.1);
     border-color: #a78bfa;
     color: #7c3aed;
 }
+
 html.dark-mode .why-card--violet:hover .why-card-arrow {
     color: #c4b5fd;
 }
