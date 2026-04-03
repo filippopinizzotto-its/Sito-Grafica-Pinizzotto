@@ -279,27 +279,30 @@
 
         <div id="chatbotWindow" class="chatbot-window">
             <div class="chat-header">
-                <div class="chat-bot-avatar" style="background: linear-gradient(135deg, var(--primary), var(--accent)); padding: 6px; display: flex; align-items: center; justify-content: center; border-radius: 12px; box-shadow: 0 4px 10px rgba(196, 30, 95, 0.2);">
-                    <svg viewBox="0 0 24 24" fill="none" style="width: 100%; height: 100%;">
-                        <mask id="header-robot-mask">
-                            <rect width="24" height="24" fill="white"/>
-                            <rect x="6" y="9.5" width="12" height="5.5" rx="2.75" fill="black"/>
-                            <circle cx="8.5" cy="12.25" r="1.1" fill="white"/>
-                            <circle cx="15.5" cy="12.25" r="1.1" fill="white"/>
-                        </mask>
-                        <g mask="url(#header-robot-mask)" fill="white">
-                            <rect x="1" y="11" width="3" height="4" rx="1"/>
-                            <rect x="20" y="11" width="3" height="4" rx="1"/>
-                            <circle cx="12" cy="2.5" r="1.3"/>
-                            <rect x="11.4" y="3" width="1.2" height="4"/>
-                            <path d="M12 6.5 C 17.5 6.5 21.5 9.4 21.5 13 C 21.5 16.6 17.5 19.5 12 19.5 C 10.6 19.5 9.3 19.2 8.1 18.7 L 4.5 20.5 C 4.2 20.7 3.8 20.5 3.9 20.2 L 5 17 C 3.7 15.9 2.5 14.5 2.5 13 C 2.5 9.4 6.5 6.5 12 6.5 Z" />
-                        </g>
-                    </svg>
+                <div class="chat-header-left">
+                    <div class="chat-bot-avatar" style="background: linear-gradient(135deg, var(--primary), var(--accent)); padding: 6px; display: flex; align-items: center; justify-content: center; border-radius: 12px; box-shadow: 0 4px 10px rgba(196, 30, 95, 0.2);">
+                        <svg viewBox="0 0 24 24" fill="none" style="width: 100%; height: 100%;">
+                            <mask id="header-robot-mask">
+                                <rect width="24" height="24" fill="white"/>
+                                <rect x="6" y="9.5" width="12" height="5.5" rx="2.75" fill="black"/>
+                                <circle cx="8.5" cy="12.25" r="1.1" fill="white"/>
+                                <circle cx="15.5" cy="12.25" r="1.1" fill="white"/>
+                            </mask>
+                            <g mask="url(#header-robot-mask)" fill="white">
+                                <rect x="1" y="11" width="3" height="4" rx="1"/>
+                                <rect x="20" y="11" width="3" height="4" rx="1"/>
+                                <circle cx="12" cy="2.5" r="1.3"/>
+                                <rect x="11.4" y="3" width="1.2" height="4"/>
+                                <path d="M12 6.5 C 17.5 6.5 21.5 9.4 21.5 13 C 21.5 16.6 17.5 19.5 12 19.5 C 10.6 19.5 9.3 19.2 8.1 18.7 L 4.5 20.5 C 4.2 20.7 3.8 20.5 3.9 20.2 L 5 17 C 3.7 15.9 2.5 14.5 2.5 13 C 2.5 9.4 6.5 6.5 12 6.5 Z" />
+                            </g>
+                        </svg>
+                    </div>
+                    <div class="chat-header-info">
+                        <h3>Assistenza AI</h3>
+                        <p><span class="status-dot"></span> Online - Pinizzotto Agent</p>
+                    </div>
                 </div>
-                <div class="chat-header-info">
-                    <h3>Assistenza AI</h3>
-                    <p><span class="status-dot"></span> Online - Pinizzotto Agent</p>
-                </div>
+                <button id="chatCloseBtn" class="chat-close-btn" aria-label="Chiudi chat">&times;</button>
             </div>
             
             <div id="chatMessages" class="chat-messages">

@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const chatForm = document.getElementById('chatForm');
     const chatInput = document.getElementById('chatInput');
     const sendBtn = document.getElementById('chatSendBtn');
+    const closeBtn = document.getElementById('chatCloseBtn');
 
     // =====================================
     //          STATE & CONFIG
@@ -131,6 +132,14 @@ document.addEventListener('DOMContentLoaded', () => {
     // =====================================
     // Apertura al click del bubble
     bubble.addEventListener('click', toggleChat);
+
+    // Chiusura al click della X nell'header
+    if (closeBtn) {
+        closeBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            toggleChat();
+        });
+    }
 
     chatForm.addEventListener('submit', (e) => {
         e.preventDefault();

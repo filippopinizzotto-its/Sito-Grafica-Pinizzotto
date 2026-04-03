@@ -21,7 +21,10 @@ API_KEY = os.environ.get("GEMINI_API_KEY")
 if not API_KEY:
     print("ERRORE: Variabile d'ambiente GEMINI_API_KEY non trovata. Controlla il file .env.")
 
-GEMINI_URL = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key={API_KEY}"
+GEMINI_URL = f"https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key={API_KEY}"
+
+
+
 
 # Prompt di sistema centrale: definisce identità, conoscenze e limiti del bot.
 SYSTEM_PROMPT = """Sei l'assistente AI ufficiale della Grafica Pinizzotto - Azienda Grafica. 
@@ -81,20 +84,19 @@ def chat():
         history = chat_memories[session_id]
         history.append({"role": "user", "parts": [{"text": message}]})
 
-        # Strutturazione dei dati nel formato JSON esatto stabilito dalle API REST di Gemini v1beta
+        # Strutturazione dei dati nel formato JSON corretto per Gemini v1/v1beta
         payload = {
             "systemInstruction": {
-                "role": "user",
                 "parts": [{"text": SYSTEM_PROMPT}]
             },
             "contents": history,
             "generationConfig": {
                 "temperature": 0.7,
-                "maxOutputTokens": 300
+                "maxOutputTokens": 400
             }
         }
 
-        # Chiamata HTTP asincrona bypassando la libreria google-generativeai per evitare problemi di deprecazione
+        # Chiamata HTTP asincrona
         req = urllib.request.Request(
             GEMINI_URL, 
             data=json.dumps(payload).encode('utf-8'), 
@@ -105,28 +107,29 @@ def chat():
             with urllib.request.urlopen(req) as response:
                 result = json.loads(response.read().decode('utf-8'))
                 
-                # Navigazione sicura della gerarchia della risposta JSON per estrarre la stringa utile
                 if 'candidates' in result and len(result['candidates']) > 0:
                     bot_message = result['candidates'][0]['content']['parts'][0]['text']
-                    
-                    # Conserviamo in memoria la risposta per i successivi messaggi
                     history.append({"role": "model", "parts": [{"text": bot_message}]})
-                    
-                    return jsonify({
-                        "success": True, 
-                        "response": bot_message
-                    })
+                    return jsonify({"success": True, "response": bot_message})
                 else:
-                    raise Exception("Risposta di Gemini API formattata in modo anomalo o vuota.")
+                    return jsonify({"success": False, "error": "Risposta IA vuota o non valida."}), 500
                     
         except urllib.error.HTTPError as he:
             error_msg = he.read().decode('utf-8')
-            print(f"Gemini HTTP Error ({he.code}): {error_msg}")
-            return jsonify({"success": False, "error": "Avaria nel collegamento IA."}), 500
+            print(f"--- ERRORE API GEMINI ({he.code}) ---")
+            print(f"Dettagli: {error_msg}")
+            
+            # Gestione specifica per chiavi invalide o disabilitate
+            if he.code == 403:
+                return jsonify({"success": False, "error": "Chiave API non autorizzata o disabilitata. Controlla Google AI Studio."}), 403
+            elif he.code == 404:
+                return jsonify({"success": False, "error": "Modello IA non trovato. Verificare configurazione."}), 404
+                
+            return jsonify({"success": False, "error": f"Errore server API: {he.code}"}), 500
 
     except Exception as e:
-        print(f"Chatbot Error: {str(e)}")
-        return jsonify({"success": False, "error": "Il servizio non è disponibile al momento."}), 500
+        print(f"Chatbot Exception: {str(e)}")
+        return jsonify({"success": False, "error": "Servizio momentaneamente non disponibile."}), 500
 
 # API per cancellare la memoria del Chatbot lato server
 @app.route("/api/reset", methods=["POST"])
