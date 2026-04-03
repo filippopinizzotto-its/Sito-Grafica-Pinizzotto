@@ -25,9 +25,9 @@
     <link rel="icon" type="image/png" sizes="192x192" href="/static/img/icons/icon-192.png">
     <link rel="icon" type="image/png" sizes="512x512" href="/static/img/icons/icon-512.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/static/img/icons/apple-touch-icon.png">
-    <!-- Botpress Webchat -->
-    <script src="https://cdn.botpress.cloud/webchat/v3.5/inject.js"></script>
-    <script src="https://files.bpcontent.cloud/2025/12/26/15/20251226150220-M60F968Y.js" defer></script>
+    <!-- Proprietary Chatbot Assets -->
+    <link rel="stylesheet" href="/static/css/chatbot.css">
+    <script src="/static/js/chatbot.js" defer></script>
     <script>
         (function () {
             document.documentElement.classList.add('theme-init');
@@ -251,6 +251,73 @@
             </div>
         </div>
     </div>
+    <!-- Proprietary AI Chatbot -->
+    <div id="chatbotContainer" class="chatbot-container">
+        <button id="chatbotBubble" class="chatbot-bubble" aria-label="Apri assistenza AI">
+            <svg viewBox="0 0 24 24" fill="none" style="width: 36px; height: 36px; margin-top: 2px;">
+                <mask id="robot-mask">
+                    <!-- Sfondo bianco (tutto disegnato) -->
+                    <rect width="24" height="24" fill="white"/>
+                    <!-- Visiera del robot - NERO (ritaglia il disegno rivelando il gradiente sotto) -->
+                    <rect x="6" y="9.5" width="12" height="5.5" rx="2.75" fill="black"/>
+                    <!-- Occhi - BIANCO (ri-disegna dentro la visiera) -->
+                    <circle cx="8.5" cy="12.25" r="1.1" fill="white"/>
+                    <circle cx="15.5" cy="12.25" r="1.1" fill="white"/>
+                </mask>
+                <g mask="url(#robot-mask)" fill="currentColor">
+                    <!-- Orecchie laterali -->
+                    <rect x="1" y="11" width="3" height="4" rx="1"/>
+                    <rect x="20" y="11" width="3" height="4" rx="1"/>
+                    <!-- Antenna -->
+                    <circle cx="12" cy="2.5" r="1.3"/>
+                    <rect x="11.4" y="3" width="1.2" height="4"/>
+                    <!-- Testa con coda (fumetto) -->
+                    <path d="M12 6.5 C 17.5 6.5 21.5 9.4 21.5 13 C 21.5 16.6 17.5 19.5 12 19.5 C 10.6 19.5 9.3 19.2 8.1 18.7 L 4.5 20.5 C 4.2 20.7 3.8 20.5 3.9 20.2 L 5 17 C 3.7 15.9 2.5 14.5 2.5 13 C 2.5 9.4 6.5 6.5 12 6.5 Z" />
+                </g>
+            </svg>
+        </button>
+
+        <div id="chatbotWindow" class="chatbot-window">
+            <div class="chat-header">
+                <div class="chat-bot-avatar" style="background: linear-gradient(135deg, var(--primary), var(--accent)); padding: 6px; display: flex; align-items: center; justify-content: center; border-radius: 12px; box-shadow: 0 4px 10px rgba(196, 30, 95, 0.2);">
+                    <svg viewBox="0 0 24 24" fill="none" style="width: 100%; height: 100%;">
+                        <mask id="header-robot-mask">
+                            <rect width="24" height="24" fill="white"/>
+                            <rect x="6" y="9.5" width="12" height="5.5" rx="2.75" fill="black"/>
+                            <circle cx="8.5" cy="12.25" r="1.1" fill="white"/>
+                            <circle cx="15.5" cy="12.25" r="1.1" fill="white"/>
+                        </mask>
+                        <g mask="url(#header-robot-mask)" fill="white">
+                            <rect x="1" y="11" width="3" height="4" rx="1"/>
+                            <rect x="20" y="11" width="3" height="4" rx="1"/>
+                            <circle cx="12" cy="2.5" r="1.3"/>
+                            <rect x="11.4" y="3" width="1.2" height="4"/>
+                            <path d="M12 6.5 C 17.5 6.5 21.5 9.4 21.5 13 C 21.5 16.6 17.5 19.5 12 19.5 C 10.6 19.5 9.3 19.2 8.1 18.7 L 4.5 20.5 C 4.2 20.7 3.8 20.5 3.9 20.2 L 5 17 C 3.7 15.9 2.5 14.5 2.5 13 C 2.5 9.4 6.5 6.5 12 6.5 Z" />
+                        </g>
+                    </svg>
+                </div>
+                <div class="chat-header-info">
+                    <h3>Assistenza AI</h3>
+                    <p><span class="status-dot"></span> Online - Pinizzotto Agent</p>
+                </div>
+            </div>
+            
+            <div id="chatMessages" class="chat-messages">
+                <!-- Messaggi caricati dinamicamente dal JS -->
+            </div>
+
+            <form id="chatForm" class="chat-input-area">
+                <input type="text" id="chatInput" class="chat-input" placeholder="Chiedi pure..." autocomplete="off">
+                <button type="submit" id="chatSendBtn" class="chat-send-btn" aria-label="Invia messaggio">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transform: translateX(-1px) translateY(1px); width: 18px; height: 18px;">
+                        <path d="M22 2L11 13"></path>
+                        <path d="M22 2L15 22L11 13L2 9L22 2z"></path>
+                    </svg>
+                </button>
+            </form>
+        </div>
+    </div>
+
     <script src="/static/js/main.js?v=5.3" defer></script>
 </body>
 
