@@ -1,33 +1,33 @@
-@media (max-width: 768px) {
-    .services .service-card:first-child .service-image {
-        display: none;
-    }
-}
+/* =========================================================================
+   STILE PRINCIPALE - Grafica Pinizzotto
+   Architettura in modalità "Liquid Glass", variabili di tema e layout core.
+   ========================================================================= */
 
-/* ===== VARIABILI CSS PREMIUM ===== */
+/* =====================================
+   VARIABILI DI SISTEMA & DESIGN TOKENS
+   ===================================== */
 :root {
-    --primary: #d94f7a;
-    /* Rosa acceso elegante */
+    /* Palette Colori Principale */
+    --primary: #d94f7a;       /* Magenta Brand */
     --primary-dark: #b83a5c;
     --primary-light: #f07fa1;
     --secondary: #e6678c;
     --accent: #fbc2d4;
-    --accent-violet: #a855f7;
-    /* Viola saturo — gradiente titoli (magenta → viola profondo) */
+    --accent-violet: #a855f7; /* Utilizzato per i gradienti intensi */
     --pastel-blue: #a8d8e8;
 
+    /* Colori di Sfondo - Tema Chiaro */
     --bg-primary: #fcfcfd;
     --bg-secondary: #f4f4f5;
-    --bg-card: rgba(255, 255, 255, 0.45);
-    /* Base traslucida glass (ridotta da 0.65) */
-    --text-primary: #09090b;
-    /* Zinc 950, quasi nero assoluto */
-    --text-secondary: #52525b;
-    /* Zinc 500 */
+    --bg-card: rgba(255, 255, 255, 0.45); /* Effetto Glass Traslucido */
+
+    /* Colori del Testo - Tema Chiaro */
+    --text-primary: #09090b;  /* Zinc 950 */
+    --text-secondary: #52525b; /* Zinc 500 */
+
+    /* Bordi Effetto Vetro */
     --border-color: rgba(9, 9, 11, 0.05);
-    /* Bordo impercettibile scuro */
     --border-glass: rgba(255, 255, 255, 0.6);
-    /* Bordo di luce per effetto vetro */
 
     --shadow-sm: 0 8px 32px rgba(31, 38, 135, 0.04);
     --shadow-md: 0 12px 40px rgba(31, 38, 135, 0.06);

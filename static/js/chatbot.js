@@ -1,5 +1,6 @@
 /**
- * CHATBOT CLIENT LOGIC - Grafica Pinizzotto
+ * Logica Lato Client - Chatbot AI Pinizzotto
+ * Gestisce l'interfaccia asincrona, le animazioni UI e le chiamate alle API REST.
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -11,19 +12,26 @@ document.addEventListener('DOMContentLoaded', () => {
     const chatInput = document.getElementById('chatInput');
     const sendBtn = document.getElementById('chatSendBtn');
 
-    // === CONFIGURAZIONE ===
+    // =====================================
+    //          STATE & CONFIG
+    // =====================================
+    // Identificatore univoco per mantenere il "filo" della conversazione col server
     let sessionId = localStorage.getItem('chatbot_session_id');
     if (!sessionId) {
         sessionId = 'sess_' + Math.random().toString(36).substr(2, 9);
         localStorage.setItem('chatbot_session_id', sessionId);
     }
 
+    // Stato della UI
     const state = {
         isOpen: false,
         isTyping: false
     };
 
-    // === FUNZIONI UI ===
+    // =====================================
+    //             UI HANDLERS
+    // =====================================
+    // Gestisce l'apertura e la chiusura della finestra chat
     const toggleChat = () => {
         state.isOpen = !state.isOpen;
         window.classList.toggle('active', state.isOpen);
@@ -72,11 +80,15 @@ document.addEventListener('DOMContentLoaded', () => {
         state.isTyping = false;
     };
 
+    // Auto-scroll in fondo per mantenere l'ultimo messaggio visibile
     const scrollToBottom = () => {
         messagesContainer.scrollTop = messagesContainer.scrollHeight;
     };
 
-    // === FUNZIONI API ===
+    // =====================================
+    //         COMUNICAZIONE API
+    // =====================================
+    // Invia il messaggio scritto e processa in modo asincrono la risposta del motore IA
     const sendMessage = async (text) => {
         if (!text.trim() || state.isTyping) return;
 
@@ -114,7 +126,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // === EVENT LISTENERS ===
+    // =====================================
+    //           EVENT LISTENERS
+    // =====================================
+    // Apertura al click del bubble
     bubble.addEventListener('click', toggleChat);
 
     chatForm.addEventListener('submit', (e) => {
@@ -122,7 +137,7 @@ document.addEventListener('DOMContentLoaded', () => {
         sendMessage(chatInput.value);
     });
 
-    // Supporto per mobile/touch
+    // Supporto invio rapido tramite tasto Enter sulla tastiera
     chatInput.addEventListener('keypress', (e) => {
         if (e.key === 'Enter') {
             e.preventDefault();

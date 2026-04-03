@@ -1,16 +1,30 @@
+"""
+Backend Principale - Sito Grafica Pinizzotto
+Gestisce il routing delle pagine web e le API REST del chatbot basato su Google Gemini.
+"""
 from flask import Flask, render_template, request, jsonify
 import os
 import urllib.request
 import json
+from dotenv import load_dotenv
+
+# Caricamento delle variabili d'ambiente segrete
+load_dotenv()
 
 app = Flask(__name__)
 
-# Configurazione Google Gemini REST API
-API_KEY = "AIzaSyDXxQlqH40ifSAVb2Ky0jLSCrEKwWWibq0"
+# ==========================================
+# CONFIGURAZIONE CHATBOT & INTELLIGENZA ARTIFICIALE
+# ==========================================
+# Cerca la chiave nel file segreto ".env" nascosto a GitHub
+API_KEY = os.environ.get("GEMINI_API_KEY")
+if not API_KEY:
+    print("ERRORE: Variabile d'ambiente GEMINI_API_KEY non trovata. Controlla il file .env.")
+
 GEMINI_URL = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key={API_KEY}"
 
-# System Prompt per definire la personalità e le conoscenze del bot
-SYSTEM_PROMPT = """Sei l'assistente AI ufficiale di Pinizzotto - Azienda Grafica. 
+# Prompt di sistema centrale: definisce identità, conoscenze e limiti del bot.
+SYSTEM_PROMPT = """Sei l'assistente AI ufficiale della Grafica Pinizzotto - Azienda Grafica. 
 Rispondi in italiano, in modo professionale, amichevole e sintetico (max 3-4 frasi).
 Informazioni chiave:
 - Sede: Via Nazionale 406/A, Piantedo (SO).
@@ -20,9 +34,12 @@ Informazioni chiave:
 - Obiettivo: Risolvere i dubbi dei clienti e guidarli verso la richiesta di un preventivo o contatto.
 Se non conosci una risposta tecnica specifica improvvisa ma plausibile e invita l'utente a contattare Marcello Pinizzotto via email o telefono."""
 
-# Memoria conversazioni locale (in produzione usare Redis o DB)
+# Sistema di memorizzazione locale delle chat. In un sistema multi-nodo, andrebbe sostituito con Redis o database.
 chat_memories = {}
 
+# ==========================================
+# RUTIND DELLE PAGINE WEB
+# ==========================================
 @app.route("/")
 def home():
     return render_template("index.html")
@@ -39,7 +56,10 @@ def preventivo():
 def contatti():
     return render_template("contatti.html")
 
-# Chatbot API: Invio messaggio
+# ==========================================
+# ENDPOINT API DEL CHATBOT
+# ==========================================
+# endpoint principale per la comunicazione col bot
 @app.route("/api/chat", methods=["POST"])
 def chat():
     try:
@@ -50,18 +70,18 @@ def chat():
         if not message:
             return jsonify({"success": False, "error": "Messaggio vuoto"}), 400
 
-        # Inizializza la chat se è una nuova sessione
+        # Se la sessione non esiste (utente nuovo), prepariamo il contesto e il messaggio iniziale di benvenuto
         if session_id not in chat_memories:
             chat_memories[session_id] = [
                 {"role": "user", "parts": [{"text": "Ciao e presentati brevissimamente."}]},
                 {"role": "model", "parts": [{"text": "Certamente! Sono l'assistente virtuale di Pinizzotto. Come posso aiutarti oggi?"}]}
             ]
 
-        # Recupera storia e aggiungi nuovo messaggio
+        # Aggiungiamo il nuovo messaggio della richiesta allo storico della conversazione
         history = chat_memories[session_id]
         history.append({"role": "user", "parts": [{"text": message}]})
 
-        # Prepara payload per API REST
+        # Strutturazione dei dati nel formato JSON esatto stabilito dalle API REST di Gemini v1beta
         payload = {
             "systemInstruction": {
                 "role": "user",
@@ -74,7 +94,7 @@ def chat():
             }
         }
 
-        # Esegui richiesta HTTP
+        # Chiamata HTTP asincrona bypassando la libreria google-generativeai per evitare problemi di deprecazione
         req = urllib.request.Request(
             GEMINI_URL, 
             data=json.dumps(payload).encode('utf-8'), 
@@ -85,11 +105,11 @@ def chat():
             with urllib.request.urlopen(req) as response:
                 result = json.loads(response.read().decode('utf-8'))
                 
-                # Estrai risposta
+                # Navigazione sicura della gerarchia della risposta JSON per estrarre la stringa utile
                 if 'candidates' in result and len(result['candidates']) > 0:
                     bot_message = result['candidates'][0]['content']['parts'][0]['text']
                     
-                    # Salva risposta nella storia
+                    # Conserviamo in memoria la risposta per i successivi messaggi
                     history.append({"role": "model", "parts": [{"text": bot_message}]})
                     
                     return jsonify({
@@ -97,18 +117,18 @@ def chat():
                         "response": bot_message
                     })
                 else:
-                    raise Exception("Risposta vuota o formato invalido da Gemini API")
+                    raise Exception("Risposta di Gemini API formattata in modo anomalo o vuota.")
                     
         except urllib.error.HTTPError as he:
             error_msg = he.read().decode('utf-8')
-            print(f"Gemini API HTTP Error {he.code}: {error_msg}")
-            return jsonify({"success": False, "error": "Errore di comunicazione con il motore IA."}), 500
+            print(f"Gemini HTTP Error ({he.code}): {error_msg}")
+            return jsonify({"success": False, "error": "Avaria nel collegamento IA."}), 500
 
     except Exception as e:
         print(f"Chatbot Error: {str(e)}")
         return jsonify({"success": False, "error": "Il servizio non è disponibile al momento."}), 500
 
-# Chatbot API: Reset sessione
+# API per cancellare la memoria del Chatbot lato server
 @app.route("/api/reset", methods=["POST"])
 def reset_chat():
     session_id = request.json.get("session_id", "default")
@@ -116,6 +136,9 @@ def reset_chat():
         del chat_memories[session_id]
     return jsonify({"success": True})
 
+# ==========================================
+# AVVIO DEL SERVER FLASK
+# ==========================================
 if __name__ == "__main__":
     port = int(os.getenv("PORT", 5000))
     app.run(host="0.0.0.0", port=port, debug=True)

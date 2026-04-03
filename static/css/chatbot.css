@@ -1,5 +1,8 @@
-/* === CHATBOT UI - PREMIUM LIQUID GLASS STYLE === */
-
+/* =========================================================================
+   STILE CHATBOT (LIQUID GLASS UI) - Grafica Pinizzotto
+   Foglio di stile dedicato esclusivamente all'interfaccia dell'assistente AI.
+   Gestisce le ombre dynamiche, il glassmorphism avanzato e i due temi chiari/scuri.
+   ========================================================================= */
 :root {
     --chat-bg: rgba(255, 255, 255, 0.4);
     --chat-border: rgba(255, 255, 255, 0.6);
@@ -16,7 +19,9 @@ html.dark-mode {
     --chat-glow: rgba(121, 40, 202, 0.15);
 }
 
-/* Floating Bubble */
+/* =====================================
+   COMPONENTE: PULSANTE FLOTTANTE (BUBBLE)
+   ===================================== */
 .chatbot-bubble {
     position: fixed;
     bottom: 30px;

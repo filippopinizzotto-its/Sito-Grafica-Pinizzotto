@@ -1,9 +1,11 @@
-// ===== CUSTOM CURSOR =====
-// Cursore personalizzato disabilitato
-// const cursorDot = document.querySelector('.cursor-dot');
-// const cursorOutline = document.querySelector('.cursor-outline');
+/**
+ * SCRIPT PRINCIPALE - Grafica Pinizzotto
+ * Logica per navigazione, gestione tema visivo e canvas particles.
+ */
 
-// ===== DARK MODE TOGGLE =====
+// =====================================
+//      GESTIONE TEMA (Light / Dark)
+// =====================================
 document.addEventListener('DOMContentLoaded', function () {
     const applySafariHighlightFix = () => {
         const ua = navigator.userAgent || navigator.vendor || window.opera;
@@ -42,7 +44,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    // Toggle theme on radio change
+    // Ascolto sui radio button per il passaggio manuale del tema
     themeRadios.forEach(radio => {
         radio.addEventListener('change', function () {
             const theme = this.value;
@@ -55,7 +57,9 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    // ===== HAMBURGER MENU =====
+    // =====================================
+    //      MENU MOBILE (HAMBURGER)
+    // =====================================
     const hamburger = document.getElementById('hamburger');
     const navMenu = document.querySelector('.nav-menu');
 
@@ -89,7 +93,8 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
 
-        // Close menu with a brief animation before navigating
+        // Chiusura automatica del menu con animazione prima di navigare
+
         document.querySelectorAll('.nav-link').forEach(link => {
             link.addEventListener('click', (e) => {
                 const isMenuOpen = hamburger.classList.contains('active');
@@ -119,16 +124,10 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // ===== TILT EFFECT DISABILITATO =====
-    /*
-    const tiltElements = document.querySelectorAll('[data-tilt], .service-card, .category-card');
-    tiltElements.forEach(el => {
-        // Logica tilt rimossa per stabilità layout
-    });
-    */
-
-    // ===== ANTIGRAVITY SHOWCASE =====
-    // ===== ANTIGRAVITY SHOWCASE: FILL-TO-FORM SINGLE SHAPE =====
+    // =====================================
+    //      ANIMAZIONE CANVAS (PARTICLES)
+    // =====================================
+    // Genera un sistema di particelle fluida ("Lightbulb") per l'hero section
     const showcase = document.querySelector('.particles-showcase-center');
     const showcaseCanvas = document.getElementById('agCanvas');
 
