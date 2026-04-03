@@ -2148,10 +2148,46 @@ html.dark-mode .page-header-badge {
 }
 
 .service-features li {
-    color: var(--text-secondary);
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 0.5rem;
+    color: var(--text-secondary);
+    font-size: 1.05rem;
+}
+
+/* --- Responsive per Service Cards --- */
+@media (max-width: 991px) {
+    .services {
+        padding: 1rem;
+        gap: 2rem;
+    }
+
+    .service-card, 
+    .service-card:nth-child(even) {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+    .service-image {
+        display: none;
+    }
+
+    .service-content {
+        padding: 2.5rem 1.5rem;
+        order: 2 !important;
+    }
+
+    .service-content h2 {
+        font-size: 1.75rem;
+    }
+
+    .service-features {
+        gap: 1rem;
+    }
+
+    .service-features li {
+        font-size: 1rem;
+    }
 }
 
 /* ===== SERVICES CATEGORIES (Servizi) ===== */
