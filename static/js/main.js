@@ -34,6 +34,14 @@ document.addEventListener('DOMContentLoaded', function () {
         htmlElement.classList.add('dark-mode');
     }
 
+    // Avoid first-load switcher slide animation during theme hydration.
+    requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+            htmlElement.classList.remove('theme-init');
+            htmlElement.classList.add('switcher-ready');
+        });
+    });
+
     // Toggle theme on radio change
     themeRadios.forEach(radio => {
         radio.addEventListener('change', function () {

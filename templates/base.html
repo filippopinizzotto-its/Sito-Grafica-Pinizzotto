@@ -17,7 +17,7 @@
     <meta name="theme-color" content="#c41e5f">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="/static/css/style.css?v=7.0">
+    <link rel="stylesheet" href="/static/css/style.css?v=7.1">
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap"
         rel="stylesheet">
@@ -30,6 +30,7 @@
     <script src="https://files.bpcontent.cloud/2025/12/26/15/20251226150220-M60F968Y.js" defer></script>
     <script>
         (function () {
+            document.documentElement.classList.add('theme-init');
             const theme = localStorage.getItem('theme') || 'dark';
             if (theme === 'dark') {
                 document.documentElement.classList.add('dark-mode');
@@ -240,7 +241,7 @@
             </div>
         </div>
     </div>
-    <script src="/static/js/main.js?v=5.2" defer></script>
+    <script src="/static/js/main.js?v=5.3" defer></script>
 </body>
 
 </html>

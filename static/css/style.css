@@ -482,8 +482,27 @@ html.dark-mode .liquid-switcher {
     background: linear-gradient(135deg, var(--primary), var(--secondary));
     border-radius: 50px;
     z-index: 1;
+    transform: translateX(0);
     transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
     box-shadow: 0 6px 15px rgba(196, 30, 95, 0.35);
+}
+
+html.dark-mode .switcher-indicator {
+    transform: translateX(46px);
+}
+
+html.theme-init .liquid-switcher,
+html.theme-init .switcher-label,
+html.theme-init .switcher-label svg,
+html.theme-init .switcher-indicator {
+    transition: none !important;
+}
+
+html:not(.switcher-ready) .liquid-switcher,
+html:not(.switcher-ready) .switcher-label,
+html:not(.switcher-ready) .switcher-label svg,
+html:not(.switcher-ready) .switcher-indicator {
+    transition: none !important;
 }
 
 /* Logic for indicator movement and state coloring */
@@ -3358,8 +3377,10 @@ html.dark-mode .select-group::after {
 }
 
 /* Fix per evitare il flash del menu mobile al caricamento */
-.nav-menu:not(.active) {
-    pointer-events: none;
+@media (max-width: 1024px) {
+    .nav-menu:not(.active) {
+        pointer-events: none;
+    }
 }
 
 @media (max-width: 768px) {
