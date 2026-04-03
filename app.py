@@ -4,24 +4,29 @@ Gestisce il routing delle pagine web e le API REST del chatbot basato su Google 
 """
 from flask import Flask, render_template, request, jsonify
 import os
+from pathlib import Path
 import urllib.request
 import json
 from dotenv import load_dotenv
+from flask_cors import CORS
 
-# Caricamento delle variabili d'ambiente segrete
-load_dotenv()
+BASE_DIR = Path(__file__).resolve().parent
+
+# Caricamento delle variabili d'ambiente segrete dal progetto, anche se il server viene avviato da un'altra cartella
+load_dotenv(BASE_DIR / ".env")
 
 app = Flask(__name__)
 
-# ==========================================
-# CONFIGURAZIONE CHATBOT & INTELLIGENZA ARTIFICIALE
-# ==========================================
-# Cerca la chiave nel file segreto ".env" nascosto a GitHub
-API_KEY = os.environ.get("GEMINI_API_KEY")
-if not API_KEY:
-    print("ERRORE: Variabile d'ambiente GEMINI_API_KEY non trovata. Controlla il file .env.")
+cors_origins = [origin.strip() for origin in os.getenv("CORS_ORIGINS", "http://localhost:5000").split(",") if origin.strip()]
+CORS(app, resources={r"/api/*": {"origins": cors_origins}, r"/health": {"origins": cors_origins}})
 
-GEMINI_URL = f"https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key={API_KEY}"
+# Definizione dei parametri IA (verranno ricaricati ogni volta per garantire affidabilità)
+def get_gemini_config():
+    """Recupera la configurazione corrente dell'IA dall'ambiente."""
+    key = os.environ.get("GEMINI_API_KEY", "").strip()
+    model = os.environ.get("GEMINI_MODEL", "gemini-2.5-flash").strip()
+    url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent?key={key}" if key else None
+    return key, model, url
 
 
 
@@ -47,6 +52,14 @@ chat_memories = {}
 def home():
     return render_template("index.html")
 
+@app.route("/health")
+def health():
+    return jsonify({
+        "success": True,
+        "api_key_loaded": bool(API_KEY),
+        "model": GEMINI_MODEL
+    })
+
 @app.route("/servizi")
 def servizi():
     return render_template("servizi.html")
@@ -66,6 +79,11 @@ def contatti():
 @app.route("/api/chat", methods=["POST"])
 def chat():
     try:
+        api_key, model_name, gemini_url = get_gemini_config()
+        
+        if not api_key or not gemini_url:
+            return jsonify({"success": False, "error": "Chiave API Gemini mancante. Verifica il file .env."}), 500
+
         data = request.json
         message = data.get("message", "").strip()
         session_id = data.get("session_id", "default")
@@ -98,7 +116,7 @@ def chat():
 
         # Chiamata HTTP asincrona
         req = urllib.request.Request(
-            GEMINI_URL, 
+            gemini_url, 
             data=json.dumps(payload).encode('utf-8'), 
             headers={'Content-Type': 'application/json'}
         )
@@ -123,7 +141,9 @@ def chat():
             if he.code == 403:
                 return jsonify({"success": False, "error": "Chiave API non autorizzata o disabilitata. Controlla Google AI Studio."}), 403
             elif he.code == 404:
-                return jsonify({"success": False, "error": "Modello IA non trovato. Verificare configurazione."}), 404
+                return jsonify({"success": False, "error": f"Modello IA non trovato ({model_name}). Verificare configurazione."}), 404
+            elif he.code == 429:
+                return jsonify({"success": False, "error": "Quota superata (Rate Limit). Riprova tra un minuto."}), 429
                 
             return jsonify({"success": False, "error": f"Errore server API: {he.code}"}), 500
 
