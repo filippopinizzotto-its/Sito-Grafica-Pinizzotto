@@ -4305,6 +4305,7 @@ html.dark-mode .why-section::before {
                 box-shadow 0.45s var(--anim-ease),
                 border-color 0.45s var(--anim-ease);
     cursor: default;
+    text-decoration: none;
     box-shadow: 0 4px 24px rgba(0,0,0,0.04);
 }
 
