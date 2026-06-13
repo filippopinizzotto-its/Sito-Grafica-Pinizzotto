@@ -984,3 +984,127 @@ if (declineCookies) {
 
 // Verifica al caricamento della pagina
 checkCookieConsent();
+
+// ===== LOGICA LIGHTBOX PORTFOLIO =====
+document.addEventListener('DOMContentLoaded', () => {
+    const lightbox = document.getElementById('portfolioLightbox');
+    const lightboxImg = document.getElementById('lightboxImage');
+    const lightboxCaption = document.getElementById('lightboxCaption');
+    const closeBtn = document.getElementById('lightboxClose');
+    const prevBtn = document.getElementById('lightboxPrev');
+    const nextBtn = document.getElementById('lightboxNext');
+
+    let portfolioImages = [];
+
+    // Funzione per raccogliere le immagini uniche dal carosello
+    const initPortfolioImages = () => {
+        portfolioImages = [];
+        document.querySelectorAll('.carousel-track .portfolio-item img').forEach(img => {
+            const src = img.getAttribute('src');
+            const overlayTitle = img.parentElement.querySelector('.portfolio-overlay h3');
+            const title = overlayTitle ? overlayTitle.textContent : img.getAttribute('alt');
+            if (src && !portfolioImages.some(item => item.src === src)) {
+                portfolioImages.push({ src, title });
+            }
+        });
+    };
+
+    let currentImgIndex = 0;
+
+    const openLightbox = (index) => {
+        if (!lightbox || !lightboxImg || !lightboxCaption || portfolioImages.length === 0) return;
+        currentImgIndex = index;
+        lightboxImg.src = portfolioImages[currentImgIndex].src;
+        lightboxCaption.textContent = portfolioImages[currentImgIndex].title;
+        lightbox.style.display = 'flex';
+
+        requestAnimationFrame(() => {
+            lightbox.classList.add('active');
+        });
+        document.body.style.overflow = 'hidden';
+    };
+
+    const closeLightbox = () => {
+        if (!lightbox) return;
+        lightbox.classList.remove('active');
+        setTimeout(() => {
+            if (!lightbox.classList.contains('active')) {
+                lightbox.style.display = 'none';
+            }
+        }, 400);
+        document.body.style.overflow = '';
+    };
+
+    const nextImage = (e) => {
+        if (e) e.stopPropagation();
+        if (portfolioImages.length === 0) return;
+        currentImgIndex = (currentImgIndex + 1) % portfolioImages.length;
+        lightboxImg.style.opacity = '0';
+        setTimeout(() => {
+            lightboxImg.src = portfolioImages[currentImgIndex].src;
+            lightboxCaption.textContent = portfolioImages[currentImgIndex].title;
+            lightboxImg.style.opacity = '1';
+        }, 200);
+    };
+
+    const prevImage = (e) => {
+        if (e) e.stopPropagation();
+        if (portfolioImages.length === 0) return;
+        currentImgIndex = (currentImgIndex - 1 + portfolioImages.length) % portfolioImages.length;
+        lightboxImg.style.opacity = '0';
+        setTimeout(() => {
+            lightboxImg.src = portfolioImages[currentImgIndex].src;
+            lightboxCaption.textContent = portfolioImages[currentImgIndex].title;
+            lightboxImg.style.opacity = '1';
+        }, 200);
+    };
+
+    // Raccogliamo le immagini. Poiché il carosello clona gli elementi, ritardiamo leggermente la raccolta
+    // per assicurarci che la struttura del DOM nel carosello sia completa.
+    setTimeout(() => {
+        initPortfolioImages();
+
+        // Collega i click sui portfolio-item
+        document.querySelectorAll('.carousel-track .portfolio-item').forEach(item => {
+            item.addEventListener('click', (e) => {
+                e.stopPropagation();
+                initPortfolioImages(); // rigenera per sicurezza
+                const imgEl = item.querySelector('img');
+                if (imgEl) {
+                    const src = imgEl.getAttribute('src');
+                    const idx = portfolioImages.findIndex(p => p.src === src);
+                    if (idx !== -1) {
+                        openLightbox(idx);
+                    }
+                }
+            });
+        });
+    }, 100);
+
+    if (closeBtn) closeBtn.addEventListener('click', closeLightbox);
+    if (nextBtn) nextBtn.addEventListener('click', nextImage);
+    if (prevBtn) prevBtn.addEventListener('click', prevImage);
+
+    if (lightbox) {
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) {
+                closeLightbox();
+            }
+        });
+    }
+
+    document.addEventListener('keydown', (e) => {
+        if (!lightbox || !lightbox.classList.contains('active')) return;
+        if (e.key === 'Escape') {
+            closeLightbox();
+        } else if (e.key === 'ArrowRight') {
+            nextImage();
+        } else if (e.key === 'ArrowLeft') {
+            prevImage();
+        }
+    });
+
+    if (lightboxImg) {
+        lightboxImg.style.transition = 'opacity 0.2s ease';
+    }
+});
