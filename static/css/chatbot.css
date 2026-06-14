@@ -164,11 +164,12 @@ html.dark-mode .chat-close-btn:hover {
 }
 
 .status-dot {
-
+    display: inline-block;
     width: 8px;
     height: 8px;
-    background: #10b981;
     border-radius: 50%;
+    background: #10b981;
+    transition: background 0.3s ease;
 }
 
 /* Messages Area */

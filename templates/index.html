@@ -196,8 +196,10 @@
             <div class="carousel-track">
                 <div class="portfolio-slide">
                     <div class="portfolio-item">
-                        <img src="{{ url_for('static', filename='img/portfolio/packaging.jpg') }}" alt="Packaging"
-                            loading="lazy">
+                        <picture>
+                            <source srcset="{{ url_for('static', filename='img/portfolio/packaging.webp') }}" type="image/webp">
+                            <img src="{{ url_for('static', filename='img/portfolio/packaging.jpg') }}" alt="Packaging" loading="lazy">
+                        </picture>
                         <div class="portfolio-overlay">
                             <h3>Packaging</h3>
                         </div>
@@ -205,8 +207,10 @@
                 </div>
                 <div class="portfolio-slide">
                     <div class="portfolio-item">
-                        <img src="{{ url_for('static', filename='img/portfolio/grande-formato.jpg') }}"
-                            alt="Grande Formato" loading="lazy">
+                        <picture>
+                            <source srcset="{{ url_for('static', filename='img/portfolio/grande-formato.webp') }}" type="image/webp">
+                            <img src="{{ url_for('static', filename='img/portfolio/grande-formato.jpg') }}" alt="Grande Formato" loading="lazy">
+                        </picture>
                         <div class="portfolio-overlay">
                             <h3>Grande Formato</h3>
                         </div>
@@ -214,8 +218,10 @@
                 </div>
                 <div class="portfolio-slide">
                     <div class="portfolio-item">
-                        <img src="{{ url_for('static', filename='img/portfolio/etichette.jpg') }}" alt="Etichette"
-                            loading="lazy">
+                        <picture>
+                            <source srcset="{{ url_for('static', filename='img/portfolio/etichette.webp') }}" type="image/webp">
+                            <img src="{{ url_for('static', filename='img/portfolio/etichette.jpg') }}" alt="Etichette" loading="lazy">
+                        </picture>
                         <div class="portfolio-overlay">
                             <h3>Etichette</h3>
                         </div>
@@ -223,8 +229,10 @@
                 </div>
                 <div class="portfolio-slide">
                     <div class="portfolio-item">
-                        <img src="{{ url_for('static', filename='img/portfolio/brouchures.jpg') }}" alt="Brochures"
-                            loading="lazy">
+                        <picture>
+                            <source srcset="{{ url_for('static', filename='img/portfolio/brouchures.webp') }}" type="image/webp">
+                            <img src="{{ url_for('static', filename='img/portfolio/brouchures.jpg') }}" alt="Brochures" loading="lazy">
+                        </picture>
                         <div class="portfolio-overlay">
                             <h3>Brochures</h3>
                         </div>

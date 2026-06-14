@@ -9,6 +9,7 @@ import urllib.request
 import json
 import time
 import re
+import secrets
 from functools import wraps
 from dotenv import load_dotenv
 from flask_cors import CORS
@@ -18,6 +19,7 @@ BASE_DIR = Path(__file__).resolve().parent
 load_dotenv(BASE_DIR / ".env")
 
 app = Flask(__name__)
+app.secret_key = os.getenv("FLASK_SECRET_KEY", secrets.token_hex(32))
 
 # ── Rate limiting ──
 rate_limit_store = {}
@@ -103,9 +105,18 @@ def home():
 @app.route("/health")
 def health():
     key, model, _ = get_gemini_config()
+    gemini_online = False
+    if key:
+        try:
+            check_url = f"https://generativelanguage.googleapis.com/v1beta/models?key={key}"
+            with urllib.request.urlopen(check_url, timeout=5) as resp:
+                gemini_online = resp.status == 200
+        except Exception:
+            gemini_online = False
     return jsonify({
         "success": True,
         "api_key_loaded": bool(key),
+        "gemini_online": gemini_online,
         "model": model,
         "env": os.getenv("FLASK_ENV", "production")
     })

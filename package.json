@@ -1,0 +1,13 @@
+{
+  "name": "pinizzotto-website",
+  "private": true,
+  "scripts": {
+    "build": "npm run build:js && npm run build:css",
+    "build:js": "terser static/js/chatbot.js --compress --mangle -o static/js/chatbot.min.js && terser static/js/main.js --compress --mangle -o static/js/main.min.js",
+    "build:css": "cleancss -o static/css/style.min.css static/css/style.css && cleancss -o static/css/chatbot.min.css static/css/chatbot.css"
+  },
+  "devDependencies": {
+    "clean-css-cli": "^5.6.3",
+    "terser": "^5.31.0"
+  }
+}

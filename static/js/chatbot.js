@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Identificatore univoco per mantenere il "filo" della conversazione col server
     let sessionId = localStorage.getItem('chatbot_session_id');
     if (!sessionId) {
-        sessionId = 'sess_' + Math.random().toString(36).substr(2, 9);
+        sessionId = 'sess_' + (crypto.randomUUID ? crypto.randomUUID().slice(0, 8) : Math.random().toString(36).substr(2, 9));
         localStorage.setItem('chatbot_session_id', sessionId);
     }
 
@@ -27,6 +27,26 @@ document.addEventListener('DOMContentLoaded', () => {
     const state = {
         isOpen: false,
         isTyping: false
+    };
+
+    const statusDot = document.querySelector('.status-dot');
+    const statusLabel = document.querySelector('.chat-header-info p');
+
+    const checkHealth = async () => {
+        try {
+            const res = await fetch('/health');
+            const data = await res.json();
+            if (data.gemini_online) {
+                if (statusDot) statusDot.style.background = '#10b981';
+                if (statusLabel) statusLabel.innerHTML = '<span class="status-dot"></span> Online';
+            } else {
+                if (statusDot) statusDot.style.background = '#ef4444';
+                if (statusLabel) statusLabel.innerHTML = '<span class="status-dot"></span> Non disponibile';
+            }
+        } catch {
+            if (statusDot) statusDot.style.background = '#ef4444';
+            if (statusLabel) statusLabel.innerHTML = '<span class="status-dot"></span> Non disponibile';
+        }
     };
 
     // =====================================
@@ -44,6 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (messagesContainer.children.length === 0) {
                 appendMessage('bot', "Ciao! Sono l'assistente virtuale di Pinizzotto. Come posso aiutarti oggi?");
             }
+            checkHealth();
         }
     };
 
