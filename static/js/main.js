@@ -136,10 +136,12 @@ document.addEventListener('DOMContentLoaded', function () {
         if (ctx) {
             const particles = [];
             const targetShape = [];
-            const mouse = { x: -9999, y: -9999, active: false, radius: 110 };
+            const mouse = { x: -9999, y: -9999, targetX: -9999, targetY: -9999, active: false, radius: 110 };
             let width = 0;
             let height = 0;
             let dpr = 1;
+            let lastTime = 0;
+            let mobileComposed = false;
 
             const buildLightbulbShape = (centerX, centerY, size) => {
                 targetShape.length = 0;
@@ -238,12 +240,13 @@ document.addEventListener('DOMContentLoaded', function () {
                         targetY: target.y,
                         size: Math.random() * 1.8 + 0.8,
                         color: palette[Math.floor(Math.random() * palette.length)],
-                        // Movimento molto più dolce e fluido
                         speed: 0.03 + Math.random() * 0.04,
-                        // Effetto di fluttuazione ("breathing/wobbling")
                         wobbleOffset: Math.random() * Math.PI * 2,
                         wobbleSpeed: 0.0005 + Math.random() * 0.0015,
-                        wobbleDist: Math.random() * 4 + 1
+                        wobbleDist: Math.random() * 4 + 1,
+                        driftPhase: Math.random() * Math.PI * 2,
+                        driftFreq: 0.0004 + Math.random() * 0.0008,
+                        driftAmp: 20 + Math.random() * 30
                     });
                 }
             };
@@ -259,11 +262,19 @@ document.addEventListener('DOMContentLoaded', function () {
                 initParticles();
             };
 
-            const animate = () => {
+            const animate = (timestamp) => {
+                if (!lastTime) lastTime = timestamp;
+                const dt = Math.min((timestamp - lastTime) / 16.667, 3);
+                lastTime = timestamp;
+
                 ctx.clearRect(0, 0, width, height);
                 const time = Date.now();
                 const mouseArea = mouse.radius;
                 const force = 0.5;
+
+                // Easing del mouse per movimento più setoso
+                mouse.x += (mouse.targetX - mouse.x) * 0.15;
+                mouse.y += (mouse.targetY - mouse.y) * 0.15;
 
                 particles.forEach(p => {
                     let baseTx, baseTy;
@@ -278,34 +289,30 @@ document.addEventListener('DOMContentLoaded', function () {
 
                         if (dist < mouseArea) {
                             const angle = Math.atan2(dy, dx);
-                            // Interazione col mouse morbida
                             baseTx += Math.cos(angle) * (mouseArea - dist) * force;
                             baseTy += Math.sin(angle) * (mouseArea - dist) * force;
                         }
                     } else {
-                        baseTx = p.scatterX;
-                        baseTy = p.scatterY;
+                        // Deriva sinusoidale fluida invece del random jitter
+                        const drift = Math.sin(time * p.driftFreq + p.driftPhase);
+                        baseTx = p.scatterX + drift * p.driftAmp * 0.3;
+                        baseTy = p.scatterY + drift * p.driftAmp * 0.3;
 
-                        // Deriva lenta naturale
-                        p.scatterX += (Math.random() - 0.5) * 0.8;
-                        p.scatterY += (Math.random() - 0.5) * 0.8;
+                        p.scatterX += Math.sin(time * p.driftFreq * 0.7 + p.driftPhase + 1) * 0.3;
+                        p.scatterY += Math.cos(time * p.driftFreq * 0.7 + p.driftPhase + 2) * 0.3;
 
-                        // Rimbalzo morbido ai bordi: impedisce salti da una parte all'altra dello schermo
                         if (p.scatterX < 0) p.scatterX = 0;
                         if (p.scatterX > width) p.scatterX = width;
                         if (p.scatterY < 0) p.scatterY = 0;
                         if (p.scatterY > height) p.scatterY = height;
                     }
 
-                    // Aggiungiamo il movimento fluttuante morbido ("dolce" e fluido)
                     const tx = baseTx + Math.cos(time * p.wobbleSpeed + p.wobbleOffset) * p.wobbleDist;
                     const ty = baseTy + Math.sin(time * p.wobbleSpeed + p.wobbleOffset) * p.wobbleDist;
 
-                    // Interpolazione inerziale per un arrivo setoso
-                    p.x += (tx - p.x) * p.speed;
-                    p.y += (ty - p.y) * p.speed;
+                    p.x += (tx - p.x) * p.speed * dt;
+                    p.y += (ty - p.y) * p.speed * dt;
 
-                    // Disegniamo tutte le particelle come perfetti cerchi
                     ctx.fillStyle = p.color;
                     ctx.beginPath();
                     ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
@@ -317,8 +324,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
             showcase.addEventListener('mousemove', (e) => {
                 const rect = showcase.getBoundingClientRect();
-                mouse.x = e.clientX - rect.left;
-                mouse.y = e.clientY - rect.top;
+                mouse.targetX = e.clientX - rect.left;
+                mouse.targetY = e.clientY - rect.top;
                 mouse.active = true;
             });
 
@@ -326,13 +333,37 @@ document.addEventListener('DOMContentLoaded', function () {
 
             showcase.addEventListener('mouseleave', () => {
                 mouse.active = false;
+                mouse.targetX = -9999;
+                mouse.targetY = -9999;
                 mouse.x = -9999;
                 mouse.y = -9999;
             });
 
+            // Supporto mobile: tocco per comporre/sfumare
+            showcase.addEventListener('touchstart', (e) => {
+                const touch = e.touches[0];
+                const rect = showcase.getBoundingClientRect();
+                mouse.targetX = touch.clientX - rect.left;
+                mouse.targetY = touch.clientY - rect.top;
+                mobileComposed = !mobileComposed;
+                mouse.active = mobileComposed;
+            }, { passive: true });
+
+            showcase.addEventListener('touchmove', (e) => {
+                if (!mouse.active) return;
+                const touch = e.touches[0];
+                const rect = showcase.getBoundingClientRect();
+                mouse.targetX = touch.clientX - rect.left;
+                mouse.targetY = touch.clientY - rect.top;
+            }, { passive: true });
+
+            showcase.addEventListener('touchend', () => {
+                // Non disattivare — il toggle è su touchstart
+            });
+
             window.addEventListener('resize', resize);
             resize();
-            animate();
+            animate(0);
         }
     }
 
@@ -965,6 +996,30 @@ if (declineCookies) {
 
 // Verifica al caricamento della pagina
 checkCookieConsent();
+
+// ===== SKELETON LOADING PORTFOLIO =====
+document.addEventListener('DOMContentLoaded', () => {
+    const track = document.querySelector('.carousel-track');
+    const observePortfolioImages = () => {
+        document.querySelectorAll('.portfolio-item img').forEach(img => {
+            const item = img.closest('.portfolio-item');
+            if (!item) return;
+            if (img.complete) {
+                item.classList.add('loaded');
+            } else {
+                img.addEventListener('load', () => item.classList.add('loaded'), { once: true });
+                img.addEventListener('error', () => item.classList.add('loaded'), { once: true });
+            }
+        });
+    };
+    observePortfolioImages();
+    // Riesegue dopo che il carosello ha clonato gli elementi
+    setTimeout(observePortfolioImages, 150);
+    // Osserva nuovi elementi aggiunti dinamicamente
+    if (track) {
+        new MutationObserver(() => observePortfolioImages()).observe(track, { childList: true, subtree: false });
+    }
+});
 
 // ===== LOGICA LIGHTBOX PORTFOLIO =====
 document.addEventListener('DOMContentLoaded', () => {

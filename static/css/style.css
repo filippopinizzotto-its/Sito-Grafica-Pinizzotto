@@ -4082,6 +4082,90 @@ button[class*="botpress"],
 }
 
 /* =====================================
+   EFFETTO GLOW / PULSE CTA
+   ===================================== */
+.btn-glow {
+    position: relative;
+    isolation: isolate;
+}
+
+.btn-glow::after {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: calc(var(--btn-radius) + 4px);
+    background: linear-gradient(135deg, var(--primary), var(--secondary), var(--primary));
+    background-size: 200% 200%;
+    z-index: -1;
+    animation: ctaPulse 2.5s ease-in-out infinite;
+    opacity: 0.6;
+    filter: blur(8px);
+}
+
+@keyframes ctaPulse {
+    0%, 100% {
+        opacity: 0.4;
+        transform: scale(1);
+        background-position: 0% 50%;
+    }
+    50% {
+        opacity: 0.8;
+        transform: scale(1.04);
+        background-position: 100% 50%;
+    }
+}
+
+.hero .btn-primary.btn-glow {
+    box-shadow: 0 0 30px rgba(217, 79, 122, 0.25);
+}
+
+.hero .btn-primary.btn-glow:hover {
+    box-shadow: 0 0 50px rgba(217, 79, 122, 0.45);
+    transform: translateY(-3px) scale(1.03);
+}
+
+/* =====================================
+   SKELETON LOADING PORTFOLIO
+   ===================================== */
+.portfolio-item {
+    position: relative;
+    overflow: hidden;
+}
+
+.portfolio-item::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(110deg,
+        var(--bg-secondary) 30%,
+        rgba(217, 79, 122, 0.08) 50%,
+        var(--bg-secondary) 70%);
+    background-size: 200% 100%;
+    animation: shimmer 1.8s ease-in-out infinite;
+    z-index: 2;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+}
+
+.portfolio-item.loaded::before {
+    opacity: 0;
+    animation: none;
+}
+
+html.dark-mode .portfolio-item::before {
+    background: linear-gradient(110deg,
+        rgba(18, 18, 20, 0.8) 30%,
+        rgba(217, 79, 122, 0.12) 50%,
+        rgba(18, 18, 20, 0.8) 70%);
+    background-size: 200% 100%;
+}
+
+@keyframes shimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+/* =====================================
    COMPONENTE: LIGHTBOX PORTFOLIO
    ===================================== */
 .portfolio-lightbox {
