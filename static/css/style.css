@@ -467,12 +467,18 @@ html:not(.switcher-ready) .switcher-indicator {
     width: auto;
     margin-bottom: 2rem;
     filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.1));
-    transition: all 0.5s var(--anim-ease);
+    animation: logoZoom 6s ease-in-out infinite;
 }
 
-.logo-hero:hover {
-    transform: scale(1.05) translateY(-5px);
-    filter: drop-shadow(0 24px 48px rgba(196, 30, 95, 0.28));
+@keyframes logoZoom {
+    0%, 100% {
+        transform: scale(1);
+        filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.1));
+    }
+    50% {
+        transform: scale(1.06);
+        filter: drop-shadow(0 24px 48px rgba(196, 30, 95, 0.2));
+    }
 }
 
 .hero-logo {
