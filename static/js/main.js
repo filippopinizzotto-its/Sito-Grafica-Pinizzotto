@@ -890,25 +890,6 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    // ===== SCROLL TO TOP BUTTON =====
-    const scrollToTopBtn = document.getElementById('scrollToTop');
-
-    if (scrollToTopBtn) {
-        window.addEventListener('scroll', () => {
-            if (window.pageYOffset > 500) {
-                scrollToTopBtn.classList.add('visible');
-            } else {
-                scrollToTopBtn.classList.remove('visible');
-            }
-        });
-
-        scrollToTopBtn.addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
-    }
 });
 
 // ============================================
